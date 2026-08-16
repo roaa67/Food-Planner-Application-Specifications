@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.foodplanner
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
