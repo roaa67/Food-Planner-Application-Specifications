@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.foodplanner
 
 import android.content.Context
 import androidx.room.Database

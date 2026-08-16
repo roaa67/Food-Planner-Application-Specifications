@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.foodplanner
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -14,9 +14,7 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface MealDao {
 
-    // ==========================================
     // FAVORITES
-    // ==========================================
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavorite(meal: FavoriteMeal): Completable
@@ -33,15 +31,11 @@ interface MealDao {
     @Query("SELECT * FROM favorites WHERE id = :mealId LIMIT 1")
     fun getFavoriteById(mealId: String): Maybe<FavoriteMeal>
 
-    @Query(
-        "SELECT EXISTS(SELECT 1 FROM favorites WHERE id = :mealId)"
-    )
+    @Query("SELECT EXISTS(SELECT 1 FROM favorites WHERE id = :mealId)")
     fun isFavorite(mealId: String): Single<Boolean>
 
 
-    // ==========================================
     // WEEKLY PLANNER
-    // ==========================================
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPlannedMeal(meal: PlannedMeal): Completable
@@ -58,9 +52,7 @@ interface MealDao {
     @Query("SELECT * FROM planned_meals ORDER BY id ASC")
     fun getAllPlannedMeals(): Flowable<List<PlannedMeal>>
 
-    @Query(
-        "SELECT * FROM planned_meals WHERE day = :day ORDER BY id ASC"
-    )
+    @Query("SELECT * FROM planned_meals WHERE day = :day ORDER BY id ASC")
     fun getMealsForDay(day: String): Flowable<List<PlannedMeal>>
 
     @Query("DELETE FROM planned_meals WHERE day = :day")

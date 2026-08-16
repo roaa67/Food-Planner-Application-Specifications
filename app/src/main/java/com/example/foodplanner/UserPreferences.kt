@@ -1,4 +1,4 @@
-package com.example.testapp
+package com.example.foodplanner
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -10,10 +10,6 @@ class UserPreferences(context: Context) {
             PREF_NAME,
             Context.MODE_PRIVATE
         )
-
-    // =========================
-    // Login
-    // =========================
 
     fun setLoggedIn(isLoggedIn: Boolean) {
         preferences.edit()
@@ -28,11 +24,6 @@ class UserPreferences(context: Context) {
         )
     }
 
-
-    // =========================
-    // Guest
-    // =========================
-
     fun setGuest(isGuest: Boolean) {
         preferences.edit()
             .putBoolean(KEY_IS_GUEST, isGuest)
@@ -46,11 +37,6 @@ class UserPreferences(context: Context) {
         )
     }
 
-
-    // =========================
-    // User ID
-    // =========================
-
     fun saveUserId(userId: String) {
         preferences.edit()
             .putString(KEY_USER_ID, userId)
@@ -63,11 +49,6 @@ class UserPreferences(context: Context) {
             null
         )
     }
-
-
-    // =========================
-    // Clear Session
-    // =========================
 
     fun clearSession() {
         preferences.edit()
