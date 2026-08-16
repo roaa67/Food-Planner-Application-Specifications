@@ -1,44 +1,45 @@
 package com.example.foodplanner
 
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
 
     @GET("random.php")
-    suspend fun getMealOfTheDay(): MealResponse
+    fun getMealOfTheDay(): Single<MealResponse>
 
     @GET("categories.php")
-    suspend fun getCategories(): CategoryResponse
+    fun getCategories(): Single<CategoryResponse>
 
     @GET("list.php?a=list")
-    suspend fun getAreas(): AreaResponse
+    fun getAreas(): Single<AreaResponse>
 
     @GET("list.php?i=list")
-    suspend fun getIngredients(): IngredientResponse
+    fun getIngredients(): Single<IngredientResponse>
 
     @GET("filter.php")
-    suspend fun getMealsByCategory(
+    fun getMealsByCategory(
         @Query("c") category: String
-    ): MealResponse
+    ): Single<MealResponse>
 
     @GET("filter.php")
-    suspend fun getMealsByArea(
+    fun getMealsByArea(
         @Query("a") area: String
-    ): MealResponse
+    ): Single<MealResponse>
 
     @GET("filter.php")
-    suspend fun getMealsByIngredient(
+    fun getMealsByIngredient(
         @Query("i") ingredient: String
-    ): MealResponse
+    ): Single<MealResponse>
 
     @GET("search.php")
-    suspend fun searchMealByName(
+    fun searchMealByName(
         @Query("s") mealName: String
-    ): MealResponse
+    ): Single<MealResponse>
 
     @GET("lookup.php")
-    suspend fun getMealDetails(
+    fun getMealDetails(
         @Query("i") mealId: String
-    ): MealResponse
+    ): Single<MealResponse>
 }
