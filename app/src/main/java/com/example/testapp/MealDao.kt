@@ -6,64 +6,66 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface MealDao {
 
-    // =========================
-    // Favorites
-    // =========================
+    // ==========================================
+    // FAVORITES
+    // ==========================================
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavorite(meal: FavoriteMeal)
+    fun insertFavorite(meal: FavoriteMeal): Completable
 
     @Delete
-    suspend fun deleteFavorite(meal: FavoriteMeal)
+    fun deleteFavorite(meal: FavoriteMeal): Completable
 
     @Query("DELETE FROM favorites WHERE id = :mealId")
-    suspend fun deleteFavoriteById(mealId: String)
+    fun deleteFavoriteById(mealId: String): Completable
 
     @Query("SELECT * FROM favorites ORDER BY name ASC")
-    suspend fun getAllFavorites(): List<FavoriteMeal>
+    fun getAllFavorites(): Flowable<List<FavoriteMeal>>
 
     @Query("SELECT * FROM favorites WHERE id = :mealId LIMIT 1")
-    suspend fun getFavoriteById(mealId: String): FavoriteMeal?
+    fun getFavoriteById(mealId: String): Maybe<FavoriteMeal>
 
     @Query(
         "SELECT EXISTS(SELECT 1 FROM favorites WHERE id = :mealId)"
     )
-    suspend fun isFavorite(mealId: String): Boolean
+    fun isFavorite(mealId: String): Single<Boolean>
 
 
-    // =========================
-    // Weekly Planner
-    // =========================
+    // ==========================================
+    // WEEKLY PLANNER
+    // ==========================================
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertPlannedMeal(meal: PlannedMeal)
+    fun insertPlannedMeal(meal: PlannedMeal): Completable
 
     @Update
-    suspend fun updatePlannedMeal(meal: PlannedMeal)
+    fun updatePlannedMeal(meal: PlannedMeal): Completable
 
     @Delete
-    suspend fun deletePlannedMeal(meal: PlannedMeal)
+    fun deletePlannedMeal(meal: PlannedMeal): Completable
 
     @Query("DELETE FROM planned_meals WHERE id = :mealId")
-    suspend fun deletePlannedMealById(mealId: Int)
+    fun deletePlannedMealById(mealId: Int): Completable
 
     @Query("SELECT * FROM planned_meals ORDER BY id ASC")
-    suspend fun getAllPlannedMeals(): List<PlannedMeal>
+    fun getAllPlannedMeals(): Flowable<List<PlannedMeal>>
 
     @Query(
         "SELECT * FROM planned_meals WHERE day = :day ORDER BY id ASC"
     )
-    suspend fun getMealsForDay(day: String): List<PlannedMeal>
+    fun getMealsForDay(day: String): Flowable<List<PlannedMeal>>
 
-    @Query(
-        "DELETE FROM planned_meals WHERE day = :day"
-    )
-    suspend fun deleteMealsForDay(day: String)
+    @Query("DELETE FROM planned_meals WHERE day = :day")
+    fun deleteMealsForDay(day: String): Completable
 
     @Query("DELETE FROM planned_meals")
-    suspend fun deleteAllPlannedMeals()
+    fun deleteAllPlannedMeals(): Completable
 }
