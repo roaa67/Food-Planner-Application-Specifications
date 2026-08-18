@@ -43,4 +43,28 @@
     <string name="loading">Loading&#8230;</string>
     <string name="error_loading">Failed to load data</string>
     <string name="retry">Retry</string>
+
+    <!-- Authentication / Login & Sign Up (Course p555-556 Text Fields, p504-519 SharedPrefs) -->
+    <string name="login_title">Login</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login_button">Login</string>
+    <string name="sign_up_button">Sign Up</string>
+    <string name="or_continue_with">Or continue with</string>
+    <string name="or_sign_up_with">Or sign up with</string>
+    <string name="dont_have_account">Don\'t have an account? </string>
+    <string name="already_have_account">Already have an account? </string>
+    <string name="guest_mode">Continue as Guest</string>
+    <string name="sign_in_google">Sign in with Google</string>
+    <string name="sign_in_facebook">Sign in with Facebook</string>
+    <string name="sign_in_apple">Sign in with Apple</string>
+    <string name="login_success">Logged in successfully!</string>
+    <string name="sign_up_success">Account created successfully!</string>
+    <string name="social_login_msg">Connecting with %1$s…</string>
+    <string name="error_empty_fields">Please fill in all required fields</string>
+    <string name="error_password_match">Passwords do not match</string>
 </resources>

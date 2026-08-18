@@ -39,10 +39,27 @@
 
         <!--
             MainActivity – Hosts all fragments via BottomNavigationView
-            Not the launcher – reached after Splash
+            Not the launcher – reached after Splash / Auth
         -->
         <activity
             android:name=".MainActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--
+            LoginActivity – Email/Password, Social Auth, and Guest Mode
+            Course ref (p44): declare Activity component in manifest
+        -->
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!--
+            SignUpActivity – User registration
+        -->
+        <activity
+            android:name=".ui.auth.SignUpActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
