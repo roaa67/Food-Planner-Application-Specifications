@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Bottom Navigation Menu (course p557-559)
+    "Limited to 5 locations max" - exactly 5 destinations
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/nav_home"
+        android:contentDescription="@string/nav_home" />
+
+    <item
+        android:id="@+id/nav_search"
+        android:icon="@drawable/ic_search"
+        android:title="@string/nav_search"
+        android:contentDescription="@string/nav_search" />
+
+    <item
+        android:id="@+id/nav_planner"
+        android:icon="@drawable/ic_planner"
+        android:title="@string/nav_planner"
+        android:contentDescription="@string/nav_planner" />
+
+    <item
+        android:id="@+id/nav_favorites"
+        android:icon="@drawable/ic_favorites"
+        android:title="@string/nav_favorites"
+        android:contentDescription="@string/nav_favorites" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/nav_profile"
+        android:contentDescription="@string/nav_profile" />
+
+</menu>

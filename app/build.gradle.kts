@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.testapp"
+    namespace = "com.example.foodplanner"
     compileSdk {
         version = release(37) {
             minorApiLevel = 1
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.testapp"
+        applicationId = "com.example.foodplanner"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
@@ -66,6 +66,14 @@ dependencies {
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+
+    // ===== UI Engineer Dependencies =====
+    // Lottie - Splash Screen animation (project specs requirement)
+    implementation("com.airbnb.android:lottie:6.4.0")
+
+    // Glide - Load meal/category images (course p633-637)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:ksp:4.16.0")
 
     // Testing
     testImplementation(libs.junit)
