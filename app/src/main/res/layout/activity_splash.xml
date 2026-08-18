@@ -49,11 +49,11 @@
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_chef_logo"
             app:lottie_rawRes="@raw/chef_logo_happy"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            tools:src="@drawable/ic_chef_logo"
-            tools:lottie_rawRes="@raw/chef_logo_happy" />
+            tools:src="@drawable/ic_chef_logo" />
 
         <!-- App Name -->
         <TextView
