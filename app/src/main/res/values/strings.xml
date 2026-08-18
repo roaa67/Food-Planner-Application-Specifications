@@ -1,3 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    All user-facing strings extracted here as per course (Localization, p568)
+    "Extract the user facing strings into strings.xml"
+-->
 <resources>
-    <string name="app_name">TestApp</string>
+    <string name="app_name">Food Planner</string>
+
+    <!-- Splash Screen -->
+    <string name="splash_tagline">Plan your meals. Enjoy healthy life!</string>
+
+    <!-- Bottom Navigation (course p557-559) -->
+    <string name="nav_home">Home</string>
+    <string name="nav_search">Search</string>
+    <string name="nav_planner">Planner</string>
+    <string name="nav_favorites">Favorites</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Home Screen -->
+    <string name="good_morning">Good morning</string>
+    <string name="meal_of_the_day">Meal of the Day</string>
+    <string name="view_recipe">View Recipe</string>
+    <string name="categories">Categories</string>
+    <string name="popular_countries">Popular Countries</string>
+    <string name="see_all">See all</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+
+    <!-- Content Descriptions for Accessibility (course p197-198) -->
+    <string name="cd_meal_image">Image of the meal</string>
+    <string name="cd_category_image">Category image</string>
+    <string name="cd_country_flag">Country flag</string>
+    <string name="cd_favorite_button">Add or remove from favorites</string>
+    <string name="cd_profile_image">Profile picture</string>
+    <string name="cd_back_button">Go back</string>
+
+    <!-- Snackbar messages (course p560-561) -->
+    <string name="added_to_favorites">Added to favorites</string>
+    <string name="removed_from_favorites">Removed from favorites</string>
+    <string name="snackbar_undo">Undo</string>
+    <string name="no_internet">No internet connection</string>
+
+    <!-- Loading / Error -->
+    <string name="loading">Loading&#8230;</string>
+    <string name="error_loading">Failed to load data</string>
+    <string name="retry">Retry</string>
 </resources>

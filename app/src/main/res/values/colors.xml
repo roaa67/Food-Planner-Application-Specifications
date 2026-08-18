@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Colors defined here as per course (Lesson: Resources, p153-154)
+    All hex colors live in colors.xml - referenced across the app
+-->
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Brand Colors -->
+    <color name="primary_green">#4CAF50</color>
+    <color name="dark_green">#2E7D32</color>
+    <color name="light_green">#E8F5E9</color>
+    <color name="medium_green">#388E3C</color>
+
+    <!-- Accent / Secondary -->
+    <color name="accent_orange">#FF6F00</color>
+    <color name="accent_orange_light">#FFF3E0</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Background Colors -->
+    <color name="bg_main">#FAFAFA</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_splash">#E8F5E9</color>
+
+    <!-- Utility -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="heart_red">#E53935</color>
+    <color name="shadow">#1A000000</color>
+
+    <!-- Bottom Nav -->
+    <color name="nav_selected">#2E7D32</color>
+    <color name="nav_unselected">#9E9E9E</color>
 </resources>
