@@ -11,7 +11,9 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.view.View
 import android.widget.TextView
-import com.airbnb.lottie.LottieAnimationView
+import android.widget.ImageView
+import com.airbnb.lottie.LottieCompositionFactory
+import com.airbnb.lottie.LottieDrawable
 import com.example.foodplanner.MainActivity
 import com.example.foodplanner.R
 import com.example.foodplanner.ui.auth.LoginActivity
@@ -38,7 +40,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val lottieLogo = findViewById<LottieAnimationView>(R.id.lottie_splash_logo)
+        val ivLogo = findViewById<ImageView>(R.id.lottie_splash_logo)
         val tvOfflineStatus = findViewById<TextView>(R.id.tv_offline_status)
 
         // Check if device has active internet connection (Course p608)
@@ -48,18 +50,23 @@ class SplashActivity : AppCompatActivity() {
         val sharedPrefs = getSharedPreferences("food_planner_prefs", Context.MODE_PRIVATE)
         sharedPrefs.edit().putBoolean("is_online", isOnline).apply()
 
-        if (isOnline) {
-            // Happy chef animation when online
-            lottieLogo?.setAnimation(R.raw.chef_logo_happy)
+        val rawRes = if (isOnline) {
             tvOfflineStatus?.visibility = View.GONE
+            R.raw.chef_logo_happy
         } else {
-            // Sad chef animation when offline (User requirement)
-            lottieLogo?.setAnimation(R.raw.chef_logo_offline)
             tvOfflineStatus?.visibility = View.VISIBLE
             Snackbar.make(findViewById(R.id.splash_root), R.string.no_internet, Snackbar.LENGTH_LONG).show()
+            R.raw.chef_logo_offline
         }
 
-        lottieLogo?.playAnimation()
+        // Programmatically attach and play Lottie animation (Course p633)
+        LottieCompositionFactory.fromRawRes(this, rawRes).addListener { composition ->
+            val lottieDrawable = LottieDrawable()
+            lottieDrawable.composition = composition
+            lottieDrawable.repeatCount = LottieDrawable.INFINITE
+            ivLogo?.setImageDrawable(lottieDrawable)
+            lottieDrawable.playAnimation()
+        }
 
         Handler(Looper.getMainLooper()).postDelayed({
             checkAuthAndNavigate()
