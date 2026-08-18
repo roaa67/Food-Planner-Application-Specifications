@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageView
+import com.bumptech.glide.Glide
 import com.example.foodplanner.MainActivity
 import com.example.foodplanner.R
 import com.example.foodplanner.ui.auth.LoginActivity
@@ -16,6 +18,7 @@ import com.example.foodplanner.ui.auth.LoginActivity
  *
  * Course reference:
  *   - Activity Lifecycle (p58-73): extends AppCompatActivity, onCreate()
+ *   - Glide image/GIF loading (p633-637): loads animated GIF logo into ImageView
  *   - SharedPreferences (p504-519): checks user session state
  *   - Explicit Intent (p243-245): navigates to LoginActivity or MainActivity
  */
@@ -23,12 +26,21 @@ import com.example.foodplanner.ui.auth.LoginActivity
 class SplashActivity : AppCompatActivity() {
 
     companion object {
-        private const val SPLASH_DELAY_MS = 2500L  // 2.5 seconds
+        private const val SPLASH_DELAY_MS = 3000L  // 3 seconds
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+
+        // Load animated GIF logo using Glide (Course p633-637)
+        val ivSplashLogo = findViewById<ImageView>(R.id.iv_splash_logo)
+        if (ivSplashLogo != null) {
+            Glide.with(this)
+                .asGif()
+                .load(R.drawable.splash_logo_animated)
+                .into(ivSplashLogo)
+        }
 
         Handler(Looper.getMainLooper()).postDelayed({
             checkAuthAndNavigate()
