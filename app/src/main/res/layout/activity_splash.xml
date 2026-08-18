@@ -51,7 +51,9 @@
             android:contentDescription="@string/app_name"
             app:lottie_rawRes="@raw/chef_logo_happy"
             app:lottie_autoPlay="true"
-            app:lottie_loop="true" />
+            app:lottie_loop="true"
+            tools:src="@drawable/ic_chef_logo"
+            tools:lottie_rawRes="@raw/chef_logo_happy" />
 
         <!-- App Name -->
         <TextView
