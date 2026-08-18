@@ -23,7 +23,13 @@
     <!-- Background Colors -->
     <color name="bg_main">#FAFAFA</color>
     <color name="bg_card">#FFFFFF</color>
-    <color name="bg_splash">#E8F5E9</color>
+    <!-- Splash: warm cream/off-white matching the design -->
+    <color name="bg_splash">#FAF9F4</color>
+    <color name="bg_splash_warm">#F5F3EC</color>
+
+    <!-- Pagination dots -->
+    <color name="dot_active">#4CAF50</color>
+    <color name="dot_inactive">#C8E6C9</color>
 
     <!-- Utility -->
     <color name="white">#FFFFFF</color>
