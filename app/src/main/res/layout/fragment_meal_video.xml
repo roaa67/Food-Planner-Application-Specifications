@@ -2,6 +2,7 @@
 <!--
     Video Tab — Engineer 1 (Lead UI/UX)
     Video player thumbnail card with Play Button overlay + active WebView + Related Meals matching mockup image 3
+    tools:showIn renders this fragment layout embedded inside activity_meal_details preview in Android Studio!
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +11,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_cream"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:showIn="@layout/activity_meal_details"
+    tools:context=".ui.mealdetails.VideoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -3,6 +3,7 @@
     Steps Tab — Engineer 1
     Numbered list of cooking steps
     Course ref: RecyclerView p330-335
+    tools:showIn renders this fragment layout embedded inside activity_meal_details preview in Android Studio!
 -->
 <androidx.recyclerview.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,5 +14,7 @@
     android:padding="@dimen/spacing_md"
     android:clipToPadding="false"
     android:background="@color/bg_cream"
+    tools:showIn="@layout/activity_meal_details"
+    tools:context=".ui.mealdetails.StepsFragment"
     tools:itemCount="5"
     tools:listitem="@layout/item_step" />

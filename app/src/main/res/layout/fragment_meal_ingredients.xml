@@ -2,6 +2,7 @@
 <!--
     Meal Ingredients Tab — Engineer 1
     RecyclerView showing ingredients + Add to Favorites button at bottom matching mockup image 1
+    tools:showIn renders this fragment layout embedded inside activity_meal_details preview in Android Studio!
 -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -10,7 +11,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:background="@color/bg_cream"
-    android:padding="@dimen/spacing_md">
+    android:padding="@dimen/spacing_md"
+    tools:showIn="@layout/activity_meal_details"
+    tools:context=".ui.mealdetails.IngredientsFragment">
 
     <!-- Ingredients List -->
     <androidx.recyclerview.widget.RecyclerView
