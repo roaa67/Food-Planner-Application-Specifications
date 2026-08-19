@@ -8,51 +8,56 @@ import com.bumptech.glide.Glide
 import com.example.foodplanner.R
 import com.example.foodplanner.databinding.ItemPlannerDayBinding
 
-data class DayItem(val dayName: String, val mealName: String?, val mealImageUrl: String?)
+data class DayItem(
+    val dayName: String,
+    val mealName: String? = null,
+    val mealImageUrl: String? = null
+)
 
 /**
  * PlannerAdapter — Engineer 1 (Lead UI/UX)
- * Shows Mon–Sun rows. Each row shows planned meal thumbnail + name, or "+ Add Meal" slot.
- * Course ref: RecyclerView.Adapter p330-335, visibility toggling p232
+ * Overrides 3 required methods (course p330-335)
+ * Displays 7 day rows (Mon-Sun) matching design mockup media_1787127362856.png:
+ *   - Left day badge box (Mon, Tue...)
+ *   - Right meal card with meal title + thumbnail image OR empty slot ("Add Meal" + plus icon)
  */
 class PlannerAdapter(
     private var days: List<DayItem>,
-    private val onAddMeal: (DayItem) -> Unit
+    private val onDayClick: (DayItem) -> Unit
 ) : RecyclerView.Adapter<PlannerAdapter.DayVH>() {
 
     inner class DayVH(val binding: ItemPlannerDayBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun getItemCount() = days.size
+    override fun getItemCount(): Int = days.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayVH =
         DayVH(ItemPlannerDayBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: DayVH, position: Int) {
         val day = days[position]
         holder.binding.tvDayName.text = day.dayName
 
-        if (day.mealName != null) {
-            // Has a planned meal — show name, thumbnail, delete button (Engineer 2 sets delete action)
+        if (!day.mealName.isNullOrEmpty()) {
+            // Planned meal slot: show meal name and thumbnail image on right
             holder.binding.tvPlannerMealName.text = day.mealName
             holder.binding.tvPlannerMealName.visibility = View.VISIBLE
-            holder.binding.tvPlannerEmpty.visibility = View.GONE
             holder.binding.ivPlannerMealImage.visibility = View.VISIBLE
-            holder.binding.btnPlannerAction.setImageResource(android.R.drawable.ic_delete)
+            holder.binding.layoutPlannerEmpty.visibility = View.GONE
 
             Glide.with(holder.binding.root.context)
                 .load(day.mealImageUrl)
                 .placeholder(R.drawable.ic_chef_logo)
+                .centerCrop()
                 .into(holder.binding.ivPlannerMealImage)
         } else {
-            // Empty slot — show "Tap + to plan a meal" and + button
+            // Empty slot: show "Add Meal" + green plus icon
             holder.binding.tvPlannerMealName.visibility = View.GONE
-            holder.binding.tvPlannerEmpty.visibility = View.VISIBLE
             holder.binding.ivPlannerMealImage.visibility = View.GONE
-            holder.binding.btnPlannerAction.setImageResource(android.R.drawable.ic_input_add)
+            holder.binding.layoutPlannerEmpty.visibility = View.VISIBLE
         }
 
-        holder.binding.btnPlannerAction.setOnClickListener {
-            onAddMeal(day)
+        holder.binding.cardPlannerMeal.setOnClickListener {
+            onDayClick(day)
         }
     }
 
