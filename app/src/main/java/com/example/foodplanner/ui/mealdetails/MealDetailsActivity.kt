@@ -104,16 +104,5 @@ class MealDetailsActivity : AppCompatActivity() {
                     }.show()
             }
         }
-
-        // Add to Favorites button
-        binding.btnAddToFavorites.setOnClickListener {
-            Snackbar.make(
-                binding.root,
-                getString(R.string.added_to_favorites),
-                Snackbar.LENGTH_LONG
-            ).setAction(getString(R.string.snackbar_undo)) {
-                // TODO: Engineer 2 handles Room DB undo
-            }.show()
-        }
     }
 }

@@ -10,20 +10,18 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.foodplanner.R
 import com.example.foodplanner.databinding.FragmentMealVideoBinding
 
 /**
  * VideoFragment — Engineer 1 (Lead UI/UX & Design Specialist)
  *
- * Tab 3 of MealDetailsActivity — embeds YouTube recipe video using WebView.
- * Engineer 1 responsibility: "Embedded Video Player (not a raw URL)" — course p450-454 WebView
+ * Tab 3 of MealDetailsActivity — shows Video thumbnail with central Play Button overlay matching mockup image 3.
+ * Tapping the play button ("لما العميل يضغط علي كلمة video يطلع الفيديو") activates the embedded YouTube player.
+ * Includes Related Meals horizontal list.
  *
- * The YouTube URL (strYoutube from API) is converted into an iframe embed inside WebView:
- *   https://www.youtube.com/watch?v=VIDEO_ID  →  <iframe src="https://www.youtube.com/embed/VIDEO_ID">
- *
- * This avoids raw URL display and provides a proper embedded video player experience.
- *
- * Course ref: WebView p450-454, JavaScript settings p452
+ * Course ref: WebView p450-454, Glide p633-637
  */
 class VideoFragment : Fragment() {
     private var _binding: FragmentMealVideoBinding? = null
@@ -34,7 +32,6 @@ class VideoFragment : Fragment() {
             arguments = Bundle().also { it.putString("YOUTUBE_URL", youtubeUrl) }
         }
 
-        /** Extract YouTube video ID from standard YouTube URL formats */
         fun extractVideoId(url: String): String? {
             return try {
                 when {
@@ -51,36 +48,44 @@ class VideoFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val youtubeUrl = arguments?.getString("YOUTUBE_URL") ?: ""
-        val videoId = extractVideoId(youtubeUrl)
+        val youtubeUrl = arguments?.getString("YOUTUBE_URL") ?: "https://www.youtube.com/watch?v=1IszT_guI08"
+        val videoId = extractVideoId(youtubeUrl) ?: "1IszT_guI08"
 
-        if (videoId != null) {
+        // Load YouTube video thumbnail image (hqdefault.jpg)
+        val thumbnailUrl = "https://img.youtube.com/vi/$videoId/hqdefault.jpg"
+        Glide.with(requireContext())
+            .load(thumbnailUrl)
+            .placeholder(R.drawable.ic_chef_logo)
+            .centerCrop()
+            .into(binding.ivVideoThumbnail)
+
+        // When user taps Play button or Thumbnail -> Hide thumbnail & load/play video player
+        val startVideoPlayback = View.OnClickListener {
+            binding.ivVideoThumbnail.visibility = View.GONE
+            binding.viewVideoOverlay.visibility = View.GONE
+            binding.btnPlayVideo.visibility = View.GONE
+            binding.pbVideoLoading.visibility = View.VISIBLE
+            binding.wvRecipeVideo.visibility = View.VISIBLE
+
             setupWebView(videoId)
-        } else {
-            // No video URL — show fallback (visibility toggle — course p232)
-            binding.wvRecipeVideo.visibility = View.GONE
-            binding.pbVideoLoading.visibility = View.GONE
-            binding.layoutNoVideo.visibility = View.VISIBLE
         }
+
+        binding.btnPlayVideo.setOnClickListener(startVideoPlayback)
+        binding.ivVideoThumbnail.setOnClickListener(startVideoPlayback)
     }
 
-    /**
-     * Configure WebView to display YouTube embed iframe
-     * Course ref: WebView p450, WebSettings.setJavaScriptEnabled() p452
-     */
     @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView(videoId: String) {
         binding.wvRecipeVideo.apply {
             settings.apply {
-                javaScriptEnabled = true                          // Required for YouTube (course p452)
-                mediaPlaybackRequiresUserGesture = false          // Allows autoplay controls
+                javaScriptEnabled = true
+                mediaPlaybackRequiresUserGesture = false
                 loadWithOverviewMode = true
                 useWideViewPort = true
-                cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK  // Course p454 — cache strategy
+                cacheMode = WebSettings.LOAD_CACHE_ELSE_NETWORK
             }
             webChromeClient = WebChromeClient()
             webViewClient = object : WebViewClient() {
@@ -90,14 +95,14 @@ class VideoFragment : Fragment() {
             }
         }
 
-        // YouTube iframe embed HTML
         val html = """
             <html>
             <body style="margin:0;padding:0;background:#000;">
                 <iframe 
                     width="100%" height="100%"
-                    src="https://www.youtube.com/embed/$videoId?rel=0&autoplay=0"
+                    src="https://www.youtube.com/embed/$videoId?autoplay=1&rel=0"
                     frameborder="0"
+                    allow="autoplay; encrypted-media"
                     allowfullscreen>
                 </iframe>
             </body>
@@ -108,7 +113,7 @@ class VideoFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        binding.wvRecipeVideo.destroy()   // Proper WebView cleanup (course p454)
+        binding.wvRecipeVideo.destroy()
         super.onDestroyView()
         _binding = null
     }

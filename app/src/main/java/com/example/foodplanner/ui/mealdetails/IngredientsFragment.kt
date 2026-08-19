@@ -45,6 +45,14 @@ class IngredientsFragment : Fragment() {
         adapter = IngredientsAdapter(defaultIngredients)
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
         binding.rvIngredients.adapter = adapter
+
+        binding.btnAddToFavorites.setOnClickListener {
+            com.google.android.material.snackbar.Snackbar.make(
+                binding.root,
+                getString(com.example.foodplanner.R.string.added_to_favorites),
+                com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 
     override fun onDestroyView() {

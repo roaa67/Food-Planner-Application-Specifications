@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Meal Ingredients Tab — Engineer 1
-    RecyclerView showing each ingredient with small image + name + measure
-    Course ref: RecyclerView p330-335
+    RecyclerView showing ingredients + Add to Favorites button at bottom matching mockup image 1
 -->
-<androidx.recyclerview.widget.RecyclerView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rv_ingredients"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/spacing_md"
-    android:clipToPadding="false"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@color/bg_cream"
-    tools:itemCount="6"
-    tools:listitem="@layout/item_ingredient" />
+    android:padding="@dimen/spacing_md">
+
+    <!-- Ingredients List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_ingredient" />
+
+    <!-- Add to Favorites Button (Green — course PrimaryButton style) -->
+    <Button
+        android:id="@+id/btn_add_to_favorites"
+        style="@style/Widget.FoodPlanner.PrimaryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_md"
+        android:layout_marginBottom="@dimen/spacing_md"
+        android:text="@string/add_to_favorites" />
+
+</LinearLayout>

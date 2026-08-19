@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     Video Tab — Engineer 1 (Lead UI/UX)
-    WebView for YouTube embed (course ref: WebView p450-454)
-    Includes Video Player + Related Meals horizontal list matching mockup media_1787124418496.png
+    Video player thumbnail card with Play Button overlay + active WebView + Related Meals matching mockup image 3
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,33 +18,73 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_md">
 
-        <!-- Video Player Card Container -->
+        <!-- Video Thumbnail & Player Card Container -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_video_container"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="3dp"
+            app:cardElevation="4dp"
             app:cardBackgroundColor="@color/black">
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <!-- WebView video player (course p450-454) -->
+                <!-- 1. WebView video player (course p450-454) -->
                 <WebView
                     android:id="@+id/wv_recipe_video"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
 
-                <!-- Loading spinner -->
+                <!-- 2. Video Thumbnail (shown initially before play is clicked) -->
+                <ImageView
+                    android:id="@+id/iv_video_thumbnail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/cd_meal_image"
+                    tools:src="@drawable/ic_chef_logo" />
+
+                <!-- 3. Dark Overlay on Thumbnail -->
+                <View
+                    android:id="@+id/view_video_overlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#44000000" />
+
+                <!-- 4. Play Button Overlay (White circle with green play arrow) -->
+                <FrameLayout
+                    android:id="@+id/btn_play_video"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_social_circle"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="2dp"
+                        android:src="@android:drawable/ic_media_play"
+                        app:tint="@color/primary_green"
+                        android:contentDescription="@string/tab_video" />
+
+                </FrameLayout>
+
+                <!-- 5. Loading spinner (shown while video loads) -->
                 <ProgressBar
                     android:id="@+id/pb_video_loading"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:indeterminateTint="@color/primary_green" />
+                    android:indeterminateTint="@color/primary_green"
+                    android:visibility="gone" />
 
-                <!-- No video fallback -->
+                <!-- 6. No video fallback -->
                 <LinearLayout
                     android:id="@+id/layout_no_video"
                     android:layout_width="match_parent"

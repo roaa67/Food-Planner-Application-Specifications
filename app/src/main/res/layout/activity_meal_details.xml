@@ -200,20 +200,9 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp2_meal_tabs"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_marginTop="@dimen/spacing_sm" />
-
-            <!-- Add to Favorites Button (Green — course PrimaryButton style) -->
-            <Button
-                android:id="@+id/btn_add_to_favorites"
-                style="@style/Widget.FoodPlanner.PrimaryButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_md"
-                android:layout_marginEnd="@dimen/spacing_md"
+                android:layout_height="550dp"
                 android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_xl"
-                android:text="@string/add_to_favorites" />
+                android:layout_marginBottom="@dimen/spacing_md" />
 
         </LinearLayout>
 
