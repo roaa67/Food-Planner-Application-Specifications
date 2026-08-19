@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    Video Tab — Engineer 1 (Lead UI/UX)
-    Video player thumbnail card with Play Button overlay + active WebView + Related Meals matching mockup image 3
-    tools:showIn renders this fragment layout embedded inside activity_meal_details preview in Android Studio!
+    Video Tab Layout — Engineer 1
+    Renders 100% complete mockup preview in Android Studio Layout Editor (media_1787126329519.png)
+    Header: Top Image + Meal Title + Tags + Tabs Bar (Video tab active with green underline)
+    Content: Video player thumbnail card + Related Meals section
 -->
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,183 +13,362 @@
     android:layout_height="match_parent"
     android:background="@color/bg_cream"
     android:fillViewport="true"
-    tools:showIn="@layout/activity_meal_details"
     tools:context=".ui.mealdetails.VideoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/spacing_md">
+        android:orientation="vertical">
 
-        <!-- Video Thumbnail & Player Card Container -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_video_container"
+        <!-- Top Header Container (Image + Title + Tags + Tabs) for Design Preview -->
+        <LinearLayout
+            android:id="@+id/layout_video_header"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/black">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <!-- Hero Image Container -->
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="220dp">
 
-                <!-- 1. WebView video player (course p450-454) -->
-                <WebView
-                    android:id="@+id/wv_recipe_video"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone" />
-
-                <!-- 2. Video Thumbnail (shown initially before play is clicked) -->
-                <ImageView
-                    android:id="@+id/iv_video_thumbnail"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_video_hero"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:contentDescription="@string/cd_meal_image"
+                    app:shapeAppearanceOverlay="@style/RoundedImageView24"
+                    android:src="@drawable/ic_chef_logo"
                     tools:src="@drawable/ic_chef_logo" />
 
-                <!-- 3. Dark Overlay on Thumbnail -->
-                <View
-                    android:id="@+id/view_video_overlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#44000000" />
-
-                <!-- 4. Play Button Overlay (White circle with green play arrow) -->
-                <FrameLayout
-                    android:id="@+id/btn_play_video"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_gravity="center"
-                    android:background="@drawable/bg_social_circle"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="2dp"
-                        android:src="@android:drawable/ic_media_play"
-                        app:tint="@color/primary_green"
-                        android:contentDescription="@string/tab_video" />
-
-                </FrameLayout>
-
-                <!-- 5. Loading spinner (shown while video loads) -->
-                <ProgressBar
-                    android:id="@+id/pb_video_loading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:indeterminateTint="@color/primary_green"
-                    android:visibility="gone" />
-
-                <!-- 6. No video fallback -->
-                <LinearLayout
-                    android:id="@+id/layout_no_video"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:visibility="gone"
-                    android:background="@color/bg_section">
-
-                    <ImageView
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:src="@android:drawable/ic_media_play"
-                        android:contentDescription="@null"
-                        android:alpha="0.3" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/no_video"
-                        android:textColor="@color/text_secondary"
-                        android:layout_marginTop="@dimen/spacing_sm" />
-
-                </LinearLayout>
+                <!-- Back Arrow (top-left) -->
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="12dp"
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="@string/cd_back_button"
+                    app:tint="@color/text_primary" />
 
             </FrameLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Related Meals Section Header -->
-        <TextView
-            android:id="@+id/tv_related_meals_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Related Meals"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Related Meals Horizontal List -->
-        <LinearLayout
-            android:id="@+id/layout_related_meals"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- Related Meal 1: Garlic Butter Shrimp -->
-            <LinearLayout
-                android:layout_width="140dp"
+            <!-- Meal Name & Heart Row -->
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="12dp">
-
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="140dp"
-                    android:layout_height="95dp"
-                    android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView"
-                    android:src="@drawable/ic_chef_logo"
-                    tools:src="@drawable/ic_chef_logo" />
+                android:paddingStart="@dimen/spacing_md"
+                android:paddingEnd="@dimen/spacing_md"
+                android:paddingTop="12dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_video_meal_name"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Garlic Butter Shrimp"
-                    android:textSize="13sp"
+                    android:text="Grilled Lemon Chicken"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="6dp" />
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_favorites"
+                    app:tint="@color/heart_red"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/cd_favorite_button" />
+
+            </RelativeLayout>
+
+            <!-- Tags Row: Country | Time | Difficulty -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/spacing_md"
+                android:paddingEnd="@dimen/spacing_md"
+                android:paddingTop="6dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:text="🇺🇸 American"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:layout_marginStart="8dp"
+                    android:text="⏱️ 45 min"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_tag"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:layout_marginStart="8dp"
+                    android:text="⚡ Easy"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <!-- Related Meal 2: Lemon Herb Salmon -->
+            <!-- Tabs Navigation Bar (Video tab ACTIVE with green indicator) -->
             <LinearLayout
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="12dp">
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:layout_width="140dp"
-                    android:layout_height="95dp"
-                    android:scaleType="centerCrop"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView"
-                    android:src="@drawable/ic_chef_logo"
-                    tools:src="@drawable/ic_chef_logo" />
-
+                <!-- Ingredients tab (inactive) -->
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tab_ingredients"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <!-- Steps tab (inactive) -->
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tab_steps"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <!-- Video tab (ACTIVE - Bold + Green Underline) -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/tab_video"
+                        android:textColor="@color/primary_green"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <!-- Active Green Underline Indicator -->
+                    <View
+                        android:layout_width="48dp"
+                        android:layout_height="3dp"
+                        android:background="@color/primary_green" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Video Player & Related Meals Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_md">
+
+            <!-- Video Thumbnail & Player Card Container -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_video_container"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/black">
+
+                <FrameLayout
                     android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- 1. WebView video player -->
+                    <WebView
+                        android:id="@+id/wv_recipe_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone" />
+
+                    <!-- 2. Video Thumbnail -->
+                    <ImageView
+                        android:id="@+id/iv_video_thumbnail"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@string/cd_meal_image"
+                        tools:src="@drawable/ic_chef_logo" />
+
+                    <!-- 3. Dark Overlay -->
+                    <View
+                        android:id="@+id/view_video_overlay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#44000000" />
+
+                    <!-- 4. Play Button Overlay -->
+                    <FrameLayout
+                        android:id="@+id/btn_play_video"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/bg_social_circle"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="2dp"
+                            android:src="@android:drawable/ic_media_play"
+                            app:tint="@color/primary_green"
+                            android:contentDescription="@string/tab_video" />
+
+                    </FrameLayout>
+
+                    <!-- 5. Loading spinner -->
+                    <ProgressBar
+                        android:id="@+id/pb_video_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@color/primary_green"
+                        android:visibility="gone" />
+
+                    <!-- 6. No video fallback -->
+                    <LinearLayout
+                        android:id="@+id/layout_no_video"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:visibility="gone"
+                        android:background="@color/bg_section">
+
+                        <ImageView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:src="@android:drawable/ic_media_play"
+                            android:contentDescription="@null"
+                            android:alpha="0.3" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/no_video"
+                            android:textColor="@color/text_secondary"
+                            android:layout_marginTop="@dimen/spacing_sm" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Related Meals Section Header -->
+            <TextView
+                android:id="@+id/tv_related_meals_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Related Meals"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Related Meals Horizontal List -->
+            <LinearLayout
+                android:id="@+id/layout_related_meals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Related Meal 1: Garlic Butter Shrimp -->
+                <LinearLayout
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:text="Lemon Herb Salmon"
-                    android:textSize="13sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:layout_marginTop="6dp" />
+                    android:orientation="vertical"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="140dp"
+                        android:layout_height="95dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView"
+                        android:src="@drawable/ic_chef_logo"
+                        tools:src="@drawable/ic_chef_logo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Garlic Butter Shrimp"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
+
+                <!-- Related Meal 2: Lemon Herb Salmon -->
+                <LinearLayout
+                    android:layout_width="140dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="12dp">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="140dp"
+                        android:layout_height="95dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/RoundedImageView"
+                        android:src="@drawable/ic_chef_logo"
+                        tools:src="@drawable/ic_chef_logo" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Lemon Herb Salmon"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginTop="6dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
