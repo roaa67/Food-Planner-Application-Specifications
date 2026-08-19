@@ -10,12 +10,14 @@ import com.example.foodplanner.databinding.FragmentMealIngredientsBinding
 
 /**
  * IngredientsFragment — Engineer 1
- * Tab 1 of MealDetailsActivity — lists all ingredients with image + measure
- * Course ref: Fragment p380, RecyclerView p330
+ * Tab 1 of MealDetailsActivity — lists ingredients with thumbnail, name, and quantity matching mockup media_1787124418496.png
+ * Course ref: Fragment p380, RecyclerView p330-335
  */
 class IngredientsFragment : Fragment() {
     private var _binding: FragmentMealIngredientsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var adapter: IngredientsAdapter
 
     companion object {
         fun newInstance(mealId: String) = IngredientsFragment().apply {
@@ -30,9 +32,23 @@ class IngredientsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val defaultIngredients = listOf(
+            IngredientItem("Chicken Breast", "2 pieces"),
+            IngredientItem("Lemon", "1 piece"),
+            IngredientItem("Garlic", "3 cloves"),
+            IngredientItem("Olive Oil", "2 tbsp"),
+            IngredientItem("Salt", "To taste"),
+            IngredientItem("Black Pepper", "To taste")
+        )
+
+        adapter = IngredientsAdapter(defaultIngredients)
         binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
-        // TODO: Engineer 2 attaches IngredientsAdapter with live data from Meal object
+        binding.rvIngredients.adapter = adapter
     }
 
-    override fun onDestroyView() { super.onDestroyView(); _binding = null }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

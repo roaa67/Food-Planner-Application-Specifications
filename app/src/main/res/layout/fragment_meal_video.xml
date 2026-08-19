@@ -2,64 +2,156 @@
 <!--
     Video Tab — Engineer 1 (Lead UI/UX)
     WebView for YouTube embed (course ref: WebView p450-454)
-    Engineer 1 responsibility: "Embedded Video Player — displaying recipe videos seamlessly"
-    Note: Engineer uses WebView with YouTube iframe embed, NOT raw URL
+    Includes Video Player + Related Meals horizontal list matching mockup media_1787124418496.png
 -->
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/bg_cream"
-    android:padding="@dimen/spacing_md">
+    android:fillViewport="true">
 
-    <!-- WebView video player (16:9 ratio) -->
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0"
-        android:paddingBottom="0dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
 
-        <WebView
-            android:id="@+id/wv_recipe_video"
+        <!-- Video Player Card Container -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="220dp"
-            android:background="@color/black" />
+            app:cardCornerRadius="16dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="@color/black">
 
-        <!-- Loading spinner (shown while video loads) -->
-        <ProgressBar
-            android:id="@+id/pb_video_loading"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <!-- WebView video player (course p450-454) -->
+                <WebView
+                    android:id="@+id/wv_recipe_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <!-- Loading spinner -->
+                <ProgressBar
+                    android:id="@+id/pb_video_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/primary_green" />
+
+                <!-- No video fallback -->
+                <LinearLayout
+                    android:id="@+id/layout_no_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:background="@color/bg_section">
+
+                    <ImageView
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@android:drawable/ic_media_play"
+                        android:contentDescription="@null"
+                        android:alpha="0.3" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_video"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="@dimen/spacing_sm" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Related Meals Section Header -->
+        <TextView
+            android:id="@+id/tv_related_meals_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminateTint="@color/primary_green" />
+            android:text="Related Meals"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp" />
 
-    </FrameLayout>
-
-    <!-- "No video available" message (shown when strYoutube is null) -->
-    <LinearLayout
-        android:id="@+id/layout_no_video"
-        android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:visibility="gone"
-        android:background="@color/bg_section">
-
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@android:drawable/ic_media_play"
-            android:contentDescription="@null"
-            android:alpha="0.3" />
-
-        <android.widget.TextView
-            android:layout_width="wrap_content"
+        <!-- Related Meals Horizontal List -->
+        <LinearLayout
+            android:id="@+id/layout_related_meals"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_video"
-            android:textColor="@color/text_secondary"
-            android:layout_marginTop="@dimen/spacing_sm" />
+            android:orientation="horizontal">
+
+            <!-- Related Meal 1: Garlic Butter Shrimp -->
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="140dp"
+                    android:layout_height="95dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/RoundedImageView"
+                    android:src="@drawable/ic_chef_logo"
+                    tools:src="@drawable/ic_chef_logo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Garlic Butter Shrimp"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginTop="6dp" />
+
+            </LinearLayout>
+
+            <!-- Related Meal 2: Lemon Herb Salmon -->
+            <LinearLayout
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginEnd="12dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="140dp"
+                    android:layout_height="95dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/RoundedImageView"
+                    android:src="@drawable/ic_chef_logo"
+                    tools:src="@drawable/ic_chef_logo" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lemon Herb Salmon"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginTop="6dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.core.widget.NestedScrollView>

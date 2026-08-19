@@ -10,12 +10,14 @@ import com.example.foodplanner.databinding.FragmentMealStepsBinding
 
 /**
  * StepsFragment — Engineer 1
- * Tab 2 of MealDetailsActivity — numbered cooking steps
- * Course ref: Fragment p380, RecyclerView p330
+ * Tab 2 of MealDetailsActivity — lists step-by-step cooking instructions with green numbered circle badges
+ * Course ref: Fragment p380, RecyclerView p330-335
  */
 class StepsFragment : Fragment() {
     private var _binding: FragmentMealStepsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var adapter: StepsAdapter
 
     companion object {
         fun newInstance(mealId: String) = StepsFragment().apply {
@@ -30,9 +32,22 @@ class StepsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val defaultSteps = listOf(
+            StepItem(1, "Marinate the chicken with lemon juice, garlic, salt and pepper."),
+            StepItem(2, "Heat olive oil in a pan."),
+            StepItem(3, "Cook the chicken for 6-7 minutes on each side."),
+            StepItem(4, "Let it rest for a few minutes."),
+            StepItem(5, "Serve with your favorite sides.")
+        )
+
+        adapter = StepsAdapter(defaultSteps)
         binding.rvSteps.layoutManager = LinearLayoutManager(requireContext())
-        // TODO: Engineer 2 parses strInstructions from Meal object and attaches StepsAdapter
+        binding.rvSteps.adapter = adapter
     }
 
-    override fun onDestroyView() { super.onDestroyView(); _binding = null }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
