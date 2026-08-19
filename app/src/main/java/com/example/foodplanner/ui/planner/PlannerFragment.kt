@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.example.foodplanner.R
 import com.example.foodplanner.databinding.FragmentPlannerBinding
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -15,20 +16,19 @@ import java.util.Locale
 /**
  * PlannerFragment — Engineer 1 (Lead UI/UX & Design Specialist)
  *
- * Single interactive Planner page matching mockup media_1787127362856.png:
+ * Self-contained single-page Planner matching mockup media_1787127362856.png:
  *   - Top header with back button & "My Planner" title
- *   - Interactive week date navigation (< Aug 17 – Aug 23 >) calculating week dates dynamically using Calendar API
- *   - 7 Day rows (Mon-Sun) with planned meals & thumbnails
+ *   - Interactive week date navigation (< Aug 17 – Aug 23 >) with Calendar API
+ *   - 7 Day rows (Mon–Sun) with thumbnails loaded via Glide
  *   - Bottom green Add Meal button
  *
- * Course ref: Fragment lifecycle p380, RecyclerView p330-335, Calendar API
+ * Course ref: Fragment lifecycle p380, Glide p633-637, Calendar API
  */
 class PlannerFragment : Fragment() {
 
     private var _binding: FragmentPlannerBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var plannerAdapter: PlannerAdapter
     private var currentWeekCalendar: Calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -43,43 +43,28 @@ class PlannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set calendar to Monday of current week
         currentWeekCalendar.firstDayOfWeek = Calendar.MONDAY
         currentWeekCalendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY)
 
-        setupRecyclerView()
         setupWeekNavigation()
-        setupAddMealButton()
+        loadMealThumbnails()
+        setupClickListeners()
         updateWeekDisplay()
     }
 
-    private fun setupRecyclerView() {
-        plannerAdapter = PlannerAdapter(getMockWeekData()) { day ->
-            Snackbar.make(binding.root, "Select meal for ${day.dayName}", Snackbar.LENGTH_SHORT).show()
-        }
-        binding.rvPlannerDays.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = plannerAdapter
-        }
-    }
-
     /**
-     * Week navigation function: < Prev / Next >
-     * Calculates date range dynamically (e.g. Aug 17 – Aug 23)
+     * Interactive week date navigation (< Prev / Next >)
      */
     private fun setupWeekNavigation() {
-        // Back arrow top bar
         binding.btnBackPlanner.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         }
 
-        // Previous week arrow (<)
         binding.btnPrevWeek.setOnClickListener {
             currentWeekCalendar.add(Calendar.WEEK_OF_YEAR, -1)
             updateWeekDisplay()
         }
 
-        // Next week arrow (>)
         binding.btnNextWeek.setOnClickListener {
             currentWeekCalendar.add(Calendar.WEEK_OF_YEAR, 1)
             updateWeekDisplay()
@@ -87,7 +72,7 @@ class PlannerFragment : Fragment() {
     }
 
     /**
-     * Calculates and formats week range text (e.g. Aug 17 – Aug 23)
+     * Calculates date range dynamically (e.g. Aug 17 – Aug 23)
      */
     private fun updateWeekDisplay() {
         val dateFormat = SimpleDateFormat("MMM d", Locale.ENGLISH)
@@ -99,25 +84,36 @@ class PlannerFragment : Fragment() {
         binding.tvWeekRange.text = rangeText
     }
 
-    private fun setupAddMealButton() {
-        binding.btnAddMealMain.setOnClickListener {
-            Snackbar.make(binding.root, "Add meal to weekly planner", Snackbar.LENGTH_SHORT).show()
+    /**
+     * Load meal thumbnails with Glide (course p633-637)
+     */
+    private fun loadMealThumbnails() {
+        val meals = listOf(
+            Pair(binding.ivMonMeal, "https://www.themealdb.com/images/media/meals/z0ageb1583189517.jpg"),
+            Pair(binding.ivTueMeal, "https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg"),
+            Pair(binding.ivWedMeal, "https://www.themealdb.com/images/media/meals/1529444830.jpg"),
+            Pair(binding.ivThuMeal, "https://www.themealdb.com/images/media/meals/1529446137.jpg"),
+            Pair(binding.ivFriMeal, "https://www.themealdb.com/images/media/meals/1549542994.jpg"),
+            Pair(binding.ivSatMeal, "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg")
+        )
+
+        meals.forEach { (imageView, url) ->
+            Glide.with(requireContext())
+                .load(url)
+                .placeholder(R.drawable.ic_chef_logo)
+                .centerCrop()
+                .into(imageView)
         }
     }
 
-    /**
-     * Mock planned meals for 7 days matching design mockup media_1787127362856.png
-     */
-    private fun getMockWeekData(): List<DayItem> {
-        return listOf(
-            DayItem("Mon", "Grilled Lemon Chicken", "https://www.themealdb.com/images/media/meals/z0ageb1583189517.jpg"),
-            DayItem("Tue", "Pasta Primavera", "https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg"),
-            DayItem("Wed", "Beef Stir Fry", "https://www.themealdb.com/images/media/meals/1529444830.jpg"),
-            DayItem("Thu", "Tomato Soup", "https://www.themealdb.com/images/media/meals/1529446137.jpg"),
-            DayItem("Fri", "Baked Salmon", "https://www.themealdb.com/images/media/meals/1549542994.jpg"),
-            DayItem("Sat", "Caesar Salad", "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg"),
-            DayItem("Sun", null, null) // Empty slot: "Add Meal" + plus icon
-        )
+    private fun setupClickListeners() {
+        binding.cardSunAdd.setOnClickListener {
+            Snackbar.make(binding.root, "Add meal for Sunday", Snackbar.LENGTH_SHORT).show()
+        }
+
+        binding.btnAddMealMain.setOnClickListener {
+            Snackbar.make(binding.root, "Add meal to weekly planner", Snackbar.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {
