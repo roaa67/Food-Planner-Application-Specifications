@@ -23,9 +23,10 @@
         <item name="colorOnBackground">@color/text_primary</item>
         <item name="colorOnSurface">@color/text_primary</item>
 
-        <!-- Status Bar -->
-        <item name="android:statusBarColor">@color/primary_green</item>
-        <item name="android:navigationBarColor">@color/white</item>
+        <!-- Status Bar — light/cream to match all screens in the mockup -->
+        <item name="android:statusBarColor">@color/bg_cream</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/bg_cream</item>
     </style>
 
     <!-- Main app theme -->
@@ -74,6 +75,25 @@
         <item name="android:textSize">@dimen/text_lg</item>
         <item name="android:textStyle">bold</item>
         <item name="textAllCaps">false</item>
+    </style>
+
+    <!-- Circular ShapeAppearance for profile photos and ingredient icons -->
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Rounded rectangle for meal thumbnails -->
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Tab text style for Meal Details TabLayout -->
+    <style name="TabTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/text_md</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
 </resources>

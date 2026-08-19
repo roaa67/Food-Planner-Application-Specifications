@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Recent Search Item — Engineer 1
+    Text + X (remove) button row
+    Course ref: LinearLayout p202
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/spacing_xs"
+    android:paddingEnd="@dimen/spacing_xs">
+
+    <!-- Search icon -->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_search"
+        android:contentDescription="@null"
+        android:layout_marginEnd="@dimen/spacing_sm"
+        android:alpha="0.5" />
+
+    <!-- Recent search text -->
+    <TextView
+        android:id="@+id/tv_recent_search_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_md"
+        tools:text="Pasta" />
+
+    <!-- Remove X button (>= 48dp touch target, course Accessibility p192) -->
+    <ImageButton
+        android:id="@+id/btn_remove_search"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/remove"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:tint="@color/text_secondary" />
+
+</LinearLayout>

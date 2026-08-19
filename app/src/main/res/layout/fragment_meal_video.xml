@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Video Tab — Engineer 1 (Lead UI/UX)
+    WebView for YouTube embed (course ref: WebView p450-454)
+    Engineer 1 responsibility: "Embedded Video Player — displaying recipe videos seamlessly"
+    Note: Engineer uses WebView with YouTube iframe embed, NOT raw URL
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_cream"
+    android:padding="@dimen/spacing_md">
+
+    <!-- WebView video player (16:9 ratio) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0"
+        android:paddingBottom="0dp">
+
+        <WebView
+            android:id="@+id/wv_recipe_video"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/black" />
+
+        <!-- Loading spinner (shown while video loads) -->
+        <ProgressBar
+            android:id="@+id/pb_video_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary_green" />
+
+    </FrameLayout>
+
+    <!-- "No video available" message (shown when strYoutube is null) -->
+    <LinearLayout
+        android:id="@+id/layout_no_video"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:background="@color/bg_section">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@android:drawable/ic_media_play"
+            android:contentDescription="@null"
+            android:alpha="0.3" />
+
+        <android.widget.TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_video"
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="@dimen/spacing_sm" />
+
+    </LinearLayout>
+
+</LinearLayout>

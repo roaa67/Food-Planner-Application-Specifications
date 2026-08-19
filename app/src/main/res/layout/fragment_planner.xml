@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    My Planner Screen — Engineer 1 (Lead UI/UX)
+    Weekly view: < Aug 17 – Aug 23 > navigation + 7 day rows
+    Course ref: ConstraintLayout p217, RecyclerView p330, Material Components p548
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_cream">
+
+    <!-- Screen Title -->
+    <TextView
+        android:id="@+id/tv_planner_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/my_planner"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
+        android:paddingTop="@dimen/spacing_md"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Week Navigation Row -->
+    <LinearLayout
+        android:id="@+id/layout_week_nav"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="@dimen/spacing_sm"
+        android:paddingBottom="@dimen/spacing_sm"
+        app:layout_constraintTop_toBottomOf="@id/tv_planner_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Previous week arrow -->
+        <ImageButton
+            android:id="@+id/btn_prev_week"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:contentDescription="@string/previous_week"
+            app:tint="@color/primary_green" />
+
+        <!-- Week range text -->
+        <TextView
+            android:id="@+id/tv_week_range"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_md"
+            tools:text="Aug 17 – Aug 23" />
+
+        <!-- Next week arrow (mirrored back arrow) -->
+        <ImageButton
+            android:id="@+id/btn_next_week"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_back"
+            android:rotation="180"
+            android:contentDescription="@string/next_week"
+            app:tint="@color/primary_green" />
+
+    </LinearLayout>
+
+    <!-- Divider -->
+    <View
+        android:id="@+id/divider_planner"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        app:layout_constraintTop_toBottomOf="@id/layout_week_nav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Days RecyclerView (Mon–Sun each row = PlannedMeal card) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_planner_days"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="@dimen/spacing_sm"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/divider_planner"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:itemCount="7"
+        tools:listitem="@layout/item_planner_day" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

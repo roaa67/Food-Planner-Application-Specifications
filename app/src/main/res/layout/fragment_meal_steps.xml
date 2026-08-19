@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Steps Tab — Engineer 1
+    Numbered list of cooking steps
+    Course ref: RecyclerView p330-335
+-->
+<androidx.recyclerview.widget.RecyclerView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rv_steps"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_md"
+    android:clipToPadding="false"
+    android:background="@color/bg_cream"
+    tools:itemCount="5"
+    tools:listitem="@layout/item_step" />

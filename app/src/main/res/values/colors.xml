@@ -20,12 +20,14 @@
     <color name="text_hint">#BDBDBD</color>
     <color name="text_on_primary">#FFFFFF</color>
 
-    <!-- Background Colors -->
-    <color name="bg_main">#FAFAFA</color>
+    <!-- Background Colors — ALL screens use cream (#FAF9F4) matching mockups -->
+    <color name="bg_main">#FAF9F4</color>
     <color name="bg_card">#FFFFFF</color>
-    <!-- Splash: warm cream/off-white matching the design -->
     <color name="bg_splash">#FAF9F4</color>
-    <color name="bg_splash_warm">#F5F3EC</color>
+    <color name="bg_cream">#FAF9F4</color>
+    <color name="bg_section">#F0EFE9</color>
+    <!-- Profile header dark green -->
+    <color name="profile_header_bg">#2E7D32</color>
 
     <!-- Pagination dots -->
     <color name="dot_active">#4CAF50</color>

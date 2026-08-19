@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Planner Day Item — Engineer 1
+    Shows day name + meal (if planned) or "+ Add Meal" slot
+    Course ref: ConstraintLayout p217, MaterialCardView p565
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_sm"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_sm"
+        android:paddingTop="@dimen/spacing_sm"
+        android:paddingBottom="@dimen/spacing_sm">
+
+        <!-- Day Name (Mon, Tue...) -->
+        <TextView
+            android:id="@+id/tv_day_name"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/primary_green"
+            android:textSize="@dimen/text_sm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="Mon" />
+
+        <!-- Meal Name (shown when planned) -->
+        <TextView
+            android:id="@+id/tv_planner_meal_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_md"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_marginEnd="@dimen/spacing_sm"
+            app:layout_constraintStart_toEndOf="@id/tv_day_name"
+            app:layout_constraintEnd_toStartOf="@id/iv_planner_meal_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_planner_empty"
+            tools:text="Grilled Lemon Chicken" />
+
+        <!-- Empty slot message (shown when no meal) -->
+        <TextView
+            android:id="@+id/tv_planner_empty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/add_meal_slot"
+            android:textColor="@color/text_hint"
+            android:textSize="@dimen/text_sm"
+            android:visibility="gone"
+            android:layout_marginStart="@dimen/spacing_sm"
+            app:layout_constraintStart_toEndOf="@id/tv_day_name"
+            app:layout_constraintEnd_toStartOf="@id/iv_planner_meal_image"
+            app:layout_constraintTop_toBottomOf="@id/tv_planner_meal_name"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone" />
+
+        <!-- Meal thumbnail (shown when planned) -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_planner_meal_image"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/cd_meal_image"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btn_planner_action"
+            tools:src="@drawable/ic_chef_logo" />
+
+        <!-- Action button: delete or add (+) -->
+        <ImageButton
+            android:id="@+id/btn_planner_action"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_input_add"
+            android:contentDescription="@string/add_meal"
+            app:tint="@color/primary_green"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

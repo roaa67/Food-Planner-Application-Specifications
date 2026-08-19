@@ -63,6 +63,16 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <!--
+            MealDetailsActivity – Shows full meal info, ingredients, steps, and video
+            Engineer 1: TabLayout + ViewPager2, embedded WebView video player (course p498-505)
+        -->
+        <activity
+            android:name=".ui.mealdetails.MealDetailsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:parentActivityName=".MainActivity" />
+
     </application>
 
 </manifest>

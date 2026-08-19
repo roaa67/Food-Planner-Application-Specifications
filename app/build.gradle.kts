@@ -32,6 +32,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    buildFeatures {
+        viewBinding = true   // ViewBinding — course p395-402: null-safe access to views
+    }
 }
 
 dependencies {
@@ -74,6 +77,9 @@ dependencies {
     // Glide - Load meal/category images (course p633-637)
     implementation("com.github.bumptech.glide:glide:4.16.0")
     ksp("com.github.bumptech.glide:ksp:4.16.0")
+
+    // ViewPager2 - for Meal Details tabs (course p498-505)
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
 
     // Testing
     testImplementation(libs.junit)
