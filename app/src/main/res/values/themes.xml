@@ -89,6 +89,12 @@
         <item name="cornerSize">12dp</item>
     </style>
 
+    <!-- Rounded rectangle for recommendation card image -->
+    <style name="RoundedImageView24" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
     <!-- Tab text style for Meal Details TabLayout -->
     <style name="TabTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
         <item name="android:textSize">@dimen/text_md</item>

@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.foodplanner.ui.auth.SignUpActivity
 import com.example.foodplanner.ui.categories.CategoriesFragment
 import com.example.foodplanner.ui.favorites.FavoritesFragment
-import com.example.foodplanner.ui.home.HomeFragment
 import com.example.foodplanner.ui.planner.PlannerFragment
 import com.example.foodplanner.ui.profile.ProfileFragment
+import com.example.foodplanner.ui.recommendation.RecommendationFragment
 import com.example.foodplanner.ui.search.SearchFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -18,20 +18,6 @@ import com.google.android.material.snackbar.Snackbar
  *
  * Hosts all 5 fragment destinations via BottomNavigationView.
  * All screens share the cream (#FAF9F4) background defined globally in Theme.FoodPlanner.
- *
- * GUEST MODE LOGIC:
- *   - If user entered as Guest (is_guest = true in SharedPreferences):
- *       - Home, Search → allowed (read-only browsing)
- *       - Profile → redirected to SignUpActivity (Create Account page)
- *       - Favorites → show Snackbar: "Create an account to save your favorites"
- *       - Planner  → show Snackbar: "Create an account to plan your meals"
- *
- * Course reference:
- *   - Activity (p46-57): Extends AppCompatActivity, setContentView in onCreate
- *   - FragmentManager (course p428-429): manages fragment transactions
- *   - BottomNavigationView listener (course p559)
- *   - SharedPreferences (course p504-519): read is_guest / is_logged_in
- *   - Snackbar (course p560-561): display guest restriction messages
  */
 class MainActivity : AppCompatActivity() {
 
@@ -43,16 +29,16 @@ class MainActivity : AppCompatActivity() {
 
         bottomNav = findViewById(R.id.bottom_navigation)
 
-        // Load HomeFragment as the default/start destination
+        // Load RecommendationFragment ("For You" - Daily Recommendation) as default start destination right after Login
         if (savedInstanceState == null) {
-            loadFragment(HomeFragment())
+            loadFragment(RecommendationFragment())
         }
 
         // BottomNavigationView item selected listener (course p559)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    loadFragment(HomeFragment())
+                    loadFragment(RecommendationFragment())  // For You (Daily Recommendation)
                     true
                 }
                 R.id.nav_search -> {

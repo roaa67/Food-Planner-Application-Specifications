@@ -107,4 +107,12 @@
     <string name="menu_about">About Us</string>
     <string name="menu_logout">Logout</string>
     <string name="logout_confirm">Are you sure you want to logout?</string>
+
+    <!-- Daily Recommendation Screen -->
+    <string name="nav_for_you">For You</string>
+    <string name="daily_recommendation">Daily Recommendation</string>
+    <string name="todays_recommendation">Today\'s Recommendation</string>
+    <string name="swipe_discover_more">Swipe to discover more</string>
+    <string name="swipe_another_recommendation">Swipe for another recommendation</string>
+
 </resources>
