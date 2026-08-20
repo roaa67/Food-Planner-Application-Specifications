@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="70dp"
+    android:height="70dp"
+    android:viewportWidth="70"
+    android:viewportHeight="70">
+    <!-- Leaf 1 -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:strokeColor="#81C784"
+        android:strokeWidth="1.2"
+        android:pathData="M10,60 Q20,20 60,10 Q50,50 10,60 Z" />
+    <path
+        android:strokeColor="#81C784"
+        android:strokeWidth="1.2"
+        android:pathData="M10,60 Q35,35 60,10" />
+    <!-- Leaf 2 -->
+    <path
+        android:fillColor="#E8F5E9"
+        android:strokeColor="#81C784"
+        android:strokeWidth="1"
+        android:pathData="M20,65 Q45,55 55,35 Q35,45 20,65 Z" />
+</vector>

@@ -1,0 +1,62 @@
+package com.example.foodplanner.ui.mealdetails
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.foodplanner.databinding.FragmentMealIngredientsBinding
+
+/**
+ * IngredientsFragment — Engineer 1
+ * Tab 1 of MealDetailsActivity — lists ingredients with thumbnail, name, and quantity matching mockup media_1787124418496.png
+ * Course ref: Fragment p380, RecyclerView p330-335
+ */
+class IngredientsFragment : Fragment() {
+    private var _binding: FragmentMealIngredientsBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var adapter: IngredientsAdapter
+
+    companion object {
+        fun newInstance(mealId: String) = IngredientsFragment().apply {
+            arguments = Bundle().also { it.putString("MEAL_ID", mealId) }
+        }
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentMealIngredientsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val defaultIngredients = listOf(
+            IngredientItem("Chicken Breast", "2 pieces"),
+            IngredientItem("Lemon", "1 piece"),
+            IngredientItem("Garlic", "3 cloves"),
+            IngredientItem("Olive Oil", "2 tbsp"),
+            IngredientItem("Salt", "To taste"),
+            IngredientItem("Black Pepper", "To taste")
+        )
+
+        adapter = IngredientsAdapter(defaultIngredients)
+        binding.rvIngredients.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvIngredients.adapter = adapter
+
+        binding.btnAddToFavorites.setOnClickListener {
+            com.google.android.material.snackbar.Snackbar.make(
+                binding.root,
+                getString(com.example.foodplanner.R.string.added_to_favorites),
+                com.google.android.material.snackbar.Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}

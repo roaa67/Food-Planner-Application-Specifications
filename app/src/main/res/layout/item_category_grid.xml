@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Category Grid Item — Engineer 1
+    Shows image, category name, and meal count in a card
+    Course ref: MaterialCardView p565-566, RecyclerView item p332
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_sm"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/spacing_sm">
+
+        <!-- Category Image -->
+        <ImageView
+            android:id="@+id/iv_category_grid_image"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/cd_meal_image"
+            tools:src="@drawable/ic_chef_logo" />
+
+        <!-- Category Name -->
+        <TextView
+            android:id="@+id/tv_category_grid_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_sm"
+            android:paddingTop="@dimen/spacing_xs"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_md"
+            tools:text="Breakfast" />
+
+        <!-- Meal Count -->
+        <TextView
+            android:id="@+id/tv_category_grid_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/spacing_sm"
+            android:paddingEnd="@dimen/spacing_sm"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_sm"
+            tools:text="45 meals" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

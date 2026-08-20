@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Favorites Item — Engineer 1
+    Row: thumbnail image + meal name + time + heart button
+    Course ref: ConstraintLayout p217, MaterialCardView p565, Accessibility p192 (48dp touch targets)
+-->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/spacing_sm"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="@dimen/spacing_sm">
+
+        <!-- Meal Thumbnail (rounded) -->
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_fav_meal_image"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/cd_meal_image"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:src="@drawable/ic_chef_logo" />
+
+        <!-- Meal Name -->
+        <TextView
+            android:id="@+id/tv_fav_meal_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:textSize="@dimen/text_md"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_marginEnd="@dimen/spacing_xs"
+            app:layout_constraintTop_toTopOf="@id/iv_fav_meal_image"
+            app:layout_constraintStart_toEndOf="@id/iv_fav_meal_image"
+            app:layout_constraintEnd_toStartOf="@id/btn_fav_heart"
+            tools:text="Grilled Lemon Chicken" />
+
+        <!-- Cooking Time -->
+        <TextView
+            android:id="@+id/tv_fav_meal_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_secondary"
+            android:textSize="@dimen/text_sm"
+            android:layout_marginStart="@dimen/spacing_sm"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_fav_meal_name"
+            app:layout_constraintStart_toEndOf="@id/iv_fav_meal_image"
+            app:layout_constraintEnd_toStartOf="@id/btn_fav_heart"
+            tools:text="45 min" />
+
+        <!-- Heart / Favorite Button (48dp min touch - course Accessibility p192) -->
+        <ImageButton
+            android:id="@+id/btn_fav_heart"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_favorites"
+            android:contentDescription="@string/cd_favorite_button"
+            app:tint="@color/heart_red"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

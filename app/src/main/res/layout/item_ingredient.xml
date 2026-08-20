@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Ingredient Item — Engineer 1
+    Small ingredient image + name + measure quantity
+    Course ref: ConstraintLayout p217
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:layout_marginBottom="@dimen/spacing_xs">
+
+    <!-- Ingredient small image -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_ingredient_detail"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/cd_meal_image"
+        app:shapeAppearanceOverlay="@style/RoundedImageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:src="@drawable/ic_chef_logo" />
+
+    <!-- Ingredient Name -->
+    <TextView
+        android:id="@+id/tv_ingredient_detail_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_md"
+        android:layout_marginStart="@dimen/spacing_sm"
+        app:layout_constraintStart_toEndOf="@id/iv_ingredient_detail"
+        app:layout_constraintEnd_toStartOf="@id/tv_ingredient_measure"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Chicken Breast" />
+
+    <!-- Measure (quantity) -->
+    <TextView
+        android:id="@+id/tv_ingredient_measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary"
+        android:textSize="@dimen/text_sm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="2 pieces" />
+
+    <!-- Divider line -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/divider"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Cooking Step Item — Engineer 1
+    Green circle step number + step text
+    Course ref: LinearLayout p202
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="@dimen/spacing_md"
+    android:gravity="top">
+
+    <!-- Numbered green circle -->
+    <TextView
+        android:id="@+id/tv_step_number"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_sm"
+        android:background="@drawable/bg_step_number"
+        android:layout_marginEnd="@dimen/spacing_sm"
+        tools:text="1" />
+
+    <!-- Step description text -->
+    <TextView
+        android:id="@+id/tv_step_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_md"
+        android:lineSpacingMultiplier="1.4"
+        tools:text="Marinate the chicken with lemon juice, garlic, salt and pepper." />
+
+</LinearLayout>

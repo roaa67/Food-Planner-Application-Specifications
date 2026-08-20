@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Profile Menu Row Item — Engineer 1
+    Icon + menu label row with 48dp touch target (Accessibility course p192)
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingStart="@dimen/spacing_md"
+    android:paddingEnd="@dimen/spacing_md"
+    android:background="?attr/selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true">
+
+    <!-- Menu Icon -->
+    <ImageView
+        android:id="@+id/iv_menu_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_planner"
+        android:contentDescription="@null"
+        android:layout_marginEnd="@dimen/spacing_md"
+        android:alpha="0.7"
+        tools:src="@drawable/ic_home" />
+
+    <!-- Menu Label -->
+    <TextView
+        android:id="@+id/tv_menu_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/text_primary"
+        android:textSize="@dimen/text_md"
+        tools:text="My Planner" />
+
+    <!-- Chevron arrow -->
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_back"
+        android:rotation="180"
+        android:contentDescription="@null"
+        android:alpha="0.4" />
+
+</LinearLayout>

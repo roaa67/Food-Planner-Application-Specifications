@@ -1,0 +1,60 @@
+package com.example.foodplanner.ui.favorites
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.foodplanner.R
+import com.example.foodplanner.databinding.ItemFavoriteBinding
+
+data class FavoriteMealItem(val name: String, val time: String, val imageUrl: String)
+
+/**
+ * FavoritesAdapter — Engineer 1 (Lead UI/UX)
+ * Displays saved meals with thumbnail, name, time, and heart remove button.
+ * Overrides the 3 required RecyclerView.Adapter methods (course p330-335)
+ */
+class FavoritesAdapter(
+    private val meals: MutableList<FavoriteMealItem>,
+    private val onRemove: (FavoriteMealItem) -> Unit
+) : RecyclerView.Adapter<FavoritesAdapter.FavoriteVH>() {
+
+    inner class FavoriteVH(val binding: ItemFavoriteBinding) :
+        RecyclerView.ViewHolder(binding.root)
+
+    override fun getItemCount() = meals.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        FavoriteVH(
+            ItemFavoriteBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        )
+
+    override fun onBindViewHolder(holder: FavoriteVH, position: Int) {
+        val meal = meals[position]
+        holder.binding.tvFavMealName.text = meal.name
+        holder.binding.tvFavMealTime.text = meal.time
+
+        Glide.with(holder.binding.root.context)
+            .load(meal.imageUrl)
+            .placeholder(R.drawable.ic_chef_logo)
+            .centerCrop()
+            .into(holder.binding.ivFavMealImage)
+
+        // Red filled heart — clicking removes from favorites and triggers Snackbar
+        holder.binding.btnFavHeart.setOnClickListener {
+            val pos = holder.adapterPosition
+            if (pos != RecyclerView.NO_ID.toInt()) {
+                val removed = meals[pos]
+                meals.removeAt(pos)
+                notifyItemRemoved(pos)
+                onRemove(removed) // Engineer 1 shows Snackbar; Engineer 2 deletes from Room
+            }
+        }
+    }
+
+    fun updateData(newMeals: List<FavoriteMealItem>) {
+        meals.clear()
+        meals.addAll(newMeals)
+        notifyDataSetChanged()
+    }
+}

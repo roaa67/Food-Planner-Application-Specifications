@@ -1,9 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Theme based on Material Components as per course (p548-552)
+    Using Theme.MaterialComponents.DayNight.NoActionBar
+    Primary color: Green (Food themed)
+-->
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TestApp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+    <style name="Base.Theme.FoodPlanner" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color (course p547 - colorPrimary) -->
+        <item name="colorPrimary">@color/primary_green</item>
+        <item name="colorPrimaryVariant">@color/dark_green</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/accent_orange</item>
+        <item name="colorSecondaryVariant">@color/accent_orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Background -->
+        <item name="android:colorBackground">@color/bg_main</item>
+        <item name="colorSurface">@color/bg_card</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+
+        <!-- Status Bar — light/cream to match all screens in the mockup -->
+        <item name="android:statusBarColor">@color/bg_cream</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/bg_cream</item>
     </style>
 
-    <style name="Theme.TestApp" parent="Base.Theme.TestApp" />
+    <!-- Main app theme -->
+    <style name="Theme.FoodPlanner" parent="Base.Theme.FoodPlanner" />
+
+    <!-- Splash Screen theme - fullscreen, no status bar -->
+    <style name="Theme.FoodPlanner.Splash" parent="Theme.FoodPlanner">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@color/bg_splash</item>
+        <item name="android:navigationBarColor">@color/bg_splash</item>
+    </style>
+
+    <!-- MaterialCardView style (course p565-566) -->
+    <style name="Widget.FoodPlanner.CardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">@dimen/card_radius</item>
+        <item name="cardElevation">@dimen/card_elevation</item>
+        <item name="android:layout_margin">@dimen/spacing_sm</item>
+    </style>
+
+    <!-- Section Title style (reusable) -->
+    <style name="TextAppearance.FoodPlanner.SectionTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">@dimen/home_section_title_size</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif-medium</item>
+    </style>
+
+    <!-- Outlined TextInputLayout with rounded corners (course p555-556) -->
+    <style name="Widget.FoodPlanner.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">@color/primary_green</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="hintTextColor">@color/primary_green</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_sm</item>
+    </style>
+
+    <!-- Rounded Primary Button (course p554, Accessibility p192) -->
+    <style name="Widget.FoodPlanner.PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">24dp</item>
+        <item name="backgroundTint">@color/primary_green</item>
+        <item name="android:minHeight">@dimen/touch_target_min</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_lg</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <!-- Circular ShapeAppearance for profile photos and ingredient icons -->
+    <style name="CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- Rounded rectangle for meal thumbnails -->
+    <style name="RoundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <!-- Rounded rectangle for recommendation card image -->
+    <style name="RoundedImageView24" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <!-- Tab text style for Meal Details TabLayout -->
+    <style name="TabTextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textSize">@dimen/text_md</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
 </resources>

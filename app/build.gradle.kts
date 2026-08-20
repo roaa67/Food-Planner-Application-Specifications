@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.testapp"
+    namespace = "com.example.foodplanner"
     compileSdk {
         version = release(37) {
             minorApiLevel = 1
@@ -12,7 +12,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.example.testapp"
+        applicationId = "com.example.foodplanner"
         minSdk = 24
         targetSdk = 37
         versionCode = 1
@@ -31,6 +31,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    buildFeatures {
+        viewBinding = true   // ViewBinding — course p395-402: null-safe access to views
     }
 }
 
@@ -66,6 +69,17 @@ dependencies {
 
     // Kotlin Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+
+    // ===== UI Engineer Dependencies =====
+    // Lottie - Splash Screen animation (project specs requirement)
+    implementation("com.airbnb.android:lottie:6.4.0")
+
+    // Glide - Load meal/category images (course p633-637)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:ksp:4.16.0")
+
+    // ViewPager2 - for Meal Details tabs (course p498-505)
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
 
     // Testing
     testImplementation(libs.junit)

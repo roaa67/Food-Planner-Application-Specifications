@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Meal Details Screen — Engineer 1 (Lead UI/UX)
+    Full image + name + tags + TabLayout (Ingredients/Steps/Video) + ViewPager2
+    Course ref: TabLayout+ViewPager2 p498-505, ConstraintLayout guidelines p229
+    Accessibility: Back button >= 48dp, Heart button >= 48dp, content descriptions set (p192)
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_cream"
+    tools:context=".ui.mealdetails.MealDetailsActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Hero Image Container -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="260dp">
+
+                <!-- Meal Image -->
+                <ImageView
+                    android:id="@+id/iv_meal_detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/cd_meal_image"
+                    tools:src="@drawable/ic_chef_logo" />
+
+                <!-- Dark gradient overlay at bottom -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/gradient_bottom_overlay" />
+
+                <!-- Back Button (48dp touch target - course Accessibility p192) -->
+                <FrameLayout
+                    android:id="@+id/btn_back_meal"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_margin="@dimen/spacing_sm"
+                    android:background="@drawable/bg_social_circle"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:contentDescription="@string/cd_back_button">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_back"
+                        android:contentDescription="@null"
+                        app:tint="@color/text_primary" />
+
+                </FrameLayout>
+
+                <!-- Favorite Heart Button (top-right) -->
+                <ImageButton
+                    android:id="@+id/btn_meal_favorite"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="top|end"
+                    android:layout_margin="@dimen/spacing_sm"
+                    android:background="@drawable/bg_social_circle"
+                    android:src="@drawable/ic_favorites"
+                    android:contentDescription="@string/cd_favorite_button"
+                    app:tint="@color/text_secondary" />
+
+            </FrameLayout>
+
+            <!-- Meal Info Card (white floating card) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:layout_marginTop="-16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_md">
+
+                    <!-- Meal Name -->
+                    <TextView
+                        android:id="@+id/tv_meal_detail_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:textSize="@dimen/text_xl"
+                        tools:text="Grilled Lemon Chicken" />
+
+                    <!-- Tags Row: Country | Time | Difficulty -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/spacing_xs"
+                        android:gravity="center_vertical">
+
+                        <!-- Country Tag -->
+                        <TextView
+                            android:id="@+id/tv_meal_area"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_tag"
+                            android:paddingStart="@dimen/spacing_sm"
+                            android:paddingEnd="@dimen/spacing_sm"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:textColor="@color/primary_green"
+                            android:textSize="@dimen/text_xs"
+                            tools:text="🇺🇸 American" />
+
+                        <!-- Time Tag -->
+                        <TextView
+                            android:id="@+id/tv_meal_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_tag"
+                            android:paddingStart="@dimen/spacing_sm"
+                            android:paddingEnd="@dimen/spacing_sm"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:layout_marginStart="@dimen/spacing_xs"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_xs"
+                            tools:text="45 min" />
+
+                        <!-- Difficulty Tag -->
+                        <TextView
+                            android:id="@+id/tv_meal_difficulty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_tag"
+                            android:paddingStart="@dimen/spacing_sm"
+                            android:paddingEnd="@dimen/spacing_sm"
+                            android:paddingTop="4dp"
+                            android:paddingBottom="4dp"
+                            android:layout_marginStart="@dimen/spacing_xs"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="@dimen/text_xs"
+                            tools:text="Easy" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- TabLayout (Ingredients / Steps / Video — course p498) -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout_meal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:layout_marginEnd="@dimen/spacing_md"
+                android:background="@color/bg_cream"
+                app:tabSelectedTextColor="@color/primary_green"
+                app:tabTextColor="@color/text_secondary"
+                app:tabIndicatorColor="@color/primary_green"
+                app:tabIndicatorHeight="3dp"
+                app:tabTextAppearance="@style/TabTextAppearance">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_ingredients" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_steps" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_video" />
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <!-- ViewPager2 (swipeable tabs content — course p502) -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp2_meal_tabs"
+                android:layout_width="match_parent"
+                android:layout_height="550dp"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginBottom="@dimen/spacing_md" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
