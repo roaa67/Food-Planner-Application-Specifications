@@ -43,18 +43,18 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(libs.androidx.junit)
-    //room
+
+    // Room
     implementation("androidx.room:room-runtime:2.8.4")
     implementation("androidx.room:room-ktx:2.8.4")
     implementation("androidx.room:room-rxjava3:2.8.4")
     ksp("androidx.room:room-compiler:2.8.4")
+
     // RxJava 3
     implementation("io.reactivex.rxjava3:rxjava:3.1.11")
     implementation("io.reactivex.rxjava3:rxandroid:3.0.2")
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.11.0")
+
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
 
@@ -85,4 +85,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
+
+    // Room Testing
+    androidTestImplementation("androidx.room:room-testing:2.8.4")
 }
