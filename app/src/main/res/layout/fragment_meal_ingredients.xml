@@ -1,225 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Ingredients Tab Layout — Engineer 1
-    Renders 100% complete mockup preview in Android Studio Layout Editor (media_1787124418496.png - Image 1)
-    Header: Top Image + Meal Title + Tags + Tabs Bar (Ingredients tab active with green underline)
-    Content: Ingredients list + Add to Favorites button
--->
-<androidx.core.widget.NestedScrollView
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_cream"
-    android:fillViewport="true"
+    android:background="@color/bg_main"
+    android:orientation="vertical"
+    android:paddingStart="18dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="18dp"
+    android:paddingBottom="24dp"
     tools:context=".ui.mealdetails.IngredientsFragment">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:text="Ingredients"
+        android:textColor="@color/text_primary"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <!-- Top Header Container (Image + Title + Tags + Tabs) for Design Preview -->
-        <LinearLayout
-            android:id="@+id/layout_ingredients_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Everything you need for this recipe"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp" />
 
-            <!-- Hero Image Container -->
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="220dp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_ingredients"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp"
+        android:scrollbars="vertical"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_ingredient" />
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/iv_ingredients_hero"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@string/cd_meal_image"
-                    app:shapeAppearanceOverlay="@style/RoundedImageView24"
-                    android:src="@drawable/ic_chef_logo"
-                    tools:src="@drawable/ic_chef_logo" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_to_favorites"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/add_to_favorites"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primary_green"
+        app:cornerRadius="26dp" />
 
-                <!-- Back Arrow (top-left) -->
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_margin="12dp"
-                    android:src="@drawable/ic_back"
-                    android:contentDescription="@string/cd_back_button"
-                    app:tint="@color/text_primary" />
-
-            </FrameLayout>
-
-            <!-- Meal Name & Heart Row -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/spacing_md"
-                android:paddingEnd="@dimen/spacing_md"
-                android:paddingTop="12dp">
-
-                <TextView
-                    android:id="@+id/tv_ingredients_meal_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Grilled Lemon Chicken"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_primary"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_favorites"
-                    app:tint="@color/heart_red"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:contentDescription="@string/cd_favorite_button" />
-
-            </RelativeLayout>
-
-            <!-- Tags Row: Country | Time | Difficulty -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="@dimen/spacing_md"
-                android:paddingEnd="@dimen/spacing_md"
-                android:paddingTop="6dp"
-                android:gravity="center_vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_tag"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:text="🇺🇸 American"
-                    android:textColor="@color/text_primary"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_tag"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:layout_marginStart="8dp"
-                    android:text="⏱️ 45 min"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_tag"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="3dp"
-                    android:paddingBottom="3dp"
-                    android:layout_marginStart="8dp"
-                    android:text="⚡ Easy"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
-
-            <!-- Tabs Navigation Bar (Ingredients tab ACTIVE with green indicator) -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp">
-
-                <!-- Ingredients tab (ACTIVE - Bold + Green Underline) -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="@string/tab_ingredients"
-                        android:textColor="@color/primary_green"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <!-- Active Green Underline Indicator -->
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="3dp"
-                        android:background="@color/primary_green" />
-
-                </LinearLayout>
-
-                <!-- Steps tab (inactive) -->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/tab_steps"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-                <!-- Video tab (inactive) -->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/tab_video"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <!-- Ingredients Content (List + Button) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/spacing_md">
-
-            <!-- Ingredients List -->
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"
-                tools:itemCount="6"
-                tools:listitem="@layout/item_ingredient" />
-
-            <!-- Add to Favorites Button (Green — course PrimaryButton style) -->
-            <Button
-                android:id="@+id/btn_add_to_favorites"
-                style="@style/Widget.FoodPlanner.PrimaryButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
-                android:layout_marginBottom="@dimen/spacing_md"
-                android:text="@string/add_to_favorites" />
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

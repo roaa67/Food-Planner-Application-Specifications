@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Cooking Step Item — Engineer 1
-    Green circle step number + step text
-    Course ref: LinearLayout p202
--->
-<LinearLayout
+
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginBottom="@dimen/spacing_md"
-    android:gravity="top">
+    android:layout_marginBottom="12dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
 
-    <!-- Numbered green circle -->
-    <TextView
-        android:id="@+id/tv_step_number"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_sm"
-        android:background="@drawable/bg_step_number"
-        android:layout_marginEnd="@dimen/spacing_sm"
-        tools:text="1" />
-
-    <!-- Step description text -->
-    <TextView
-        android:id="@+id/tv_step_text"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_md"
-        android:lineSpacingMultiplier="1.4"
-        tools:text="Marinate the chicken with lemon juice, garlic, salt and pepper." />
+        android:minHeight="68dp"
+        android:paddingStart="14dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="14dp"
+        android:paddingBottom="14dp">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_step_number"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_step_number"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/tv_step_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:ellipsize="none"
+            android:includeFontPadding="true"
+            android:lineSpacingExtra="4dp"
+            android:maxLines="100"
+            android:singleLine="false"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_step_number"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="To prepare the sauerkraut filling, melt the butter in a skillet over medium heat. Add the onion and cook until translucent, then continue with the remaining ingredients." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

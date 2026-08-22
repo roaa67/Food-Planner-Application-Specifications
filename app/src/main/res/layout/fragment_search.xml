@@ -1,67 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Search Screen — Engineer 1 (Lead UI/UX)
-    Search bar + filter chips + popular ingredients + recent searches
-    Course ref: ConstraintLayout guidelines p217, RecyclerView p330, Material Components p548
--->
+
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_cream"
-    android:fillViewport="true">
+    android:background="@color/bg_main"
+    android:fillViewport="true"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/spacing_md">
+        android:paddingStart="20dp"
+        android:paddingTop="18dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="32dp">
 
-        <!-- Screen Title -->
+        <!-- ============================================ -->
+        <!-- HEADER -->
+        <!-- ============================================ -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/search"
-            android:textSize="@dimen/text_title"
-            android:textStyle="bold"
+            android:text="Find your next meal"
             android:textColor="@color/text_primary"
-            android:paddingBottom="@dimen/spacing_sm" />
+            android:textSize="26sp"
+            android:textStyle="bold" />
 
-        <!-- Search Bar (TextInputLayout course p555) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Search by ingredient, country or category"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <!-- ============================================ -->
+        <!-- SEARCH BAR -->
+        <!-- ============================================ -->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
             android:hint="@string/search_hint"
             app:startIconDrawable="@drawable/ic_search"
             app:startIconTint="@color/text_secondary"
-            app:boxCornerRadiusTopStart="30dp"
-            app:boxCornerRadiusTopEnd="30dp"
-            app:boxCornerRadiusBottomStart="30dp"
-            app:boxCornerRadiusBottomEnd="30dp"
             app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusTopStart="22dp"
+            app:boxCornerRadiusTopEnd="22dp"
+            app:boxCornerRadiusBottomStart="22dp"
+            app:boxCornerRadiusBottomEnd="22dp"
             app:boxStrokeColor="@color/divider"
+            app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="1.5dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_search"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="56dp"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="15sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Filter Chip Group (course p549 Material Chips) -->
+        <!-- ============================================ -->
+        <!-- FILTER CHIPS -->
+        <!-- ============================================ -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Search by"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginTop="10dp"
+            app:chipSpacingHorizontal="8dp"
+            app:chipSpacingVertical="8dp"
             app:singleSelection="true"
             app:selectionRequired="true">
 
@@ -69,113 +101,139 @@
                 android:id="@+id/chip_by_ingredient"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/by_ingredient"
+                android:layout_height="42dp"
                 android:checked="true"
+                android:text="@string/by_ingredient"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                app:checkedIconVisible="false"
                 app:chipBackgroundColor="@color/light_green"
+                app:chipCornerRadius="21dp"
                 app:chipStrokeColor="@color/primary_green"
-                app:chipStrokeWidth="1dp"
-                app:checkedIconVisible="false" />
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_by_country"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:text="@string/by_country"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                app:checkedIconVisible="false"
                 app:chipBackgroundColor="@color/light_green"
+                app:chipCornerRadius="21dp"
                 app:chipStrokeColor="@color/primary_green"
-                app:chipStrokeWidth="1dp"
-                app:checkedIconVisible="false" />
+                app:chipStrokeWidth="1dp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_by_category"
                 style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="42dp"
                 android:text="@string/by_category"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                app:checkedIconVisible="false"
                 app:chipBackgroundColor="@color/light_green"
+                app:chipCornerRadius="21dp"
                 app:chipStrokeColor="@color/primary_green"
-                app:chipStrokeWidth="1dp"
-                app:checkedIconVisible="false" />
+                app:chipStrokeWidth="1dp" />
 
         </com.google.android.material.chip.ChipGroup>
 
-        <!-- Popular Ingredients Header -->
+        <!-- ============================================ -->
+        <!-- POPULAR INGREDIENTS -->
+        <!-- ============================================ -->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/spacing_md"
-            android:gravity="center_vertical">
+            android:layout_height="48dp"
+            android:layout_marginTop="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/popular_ingredients"
-                android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:textSize="@dimen/text_lg" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Popular Ingredients horizontal list (RecyclerView course p330) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_popular_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
             android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             tools:itemCount="5"
             tools:listitem="@layout/item_search_ingredient" />
 
-        <!-- Recent Searches Header -->
+        <!-- ============================================ -->
+        <!-- RECENT SEARCHES -->
+        <!-- ============================================ -->
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/spacing_md"
-            android:gravity="center_vertical">
+            android:layout_height="48dp"
+            android:layout_marginTop="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/recent_searches"
-                android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:textSize="@dimen/text_lg" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_clear_all"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:paddingEnd="4dp"
                 android:text="@string/clear_all"
                 android:textColor="@color/primary_green"
-                android:textSize="@dimen/text_sm"
-                android:padding="@dimen/spacing_xs" />
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Recent Searches list (RecyclerView) -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_recent_searches"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xs"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
+            android:paddingBottom="4dp"
             tools:itemCount="3"
             tools:listitem="@layout/item_recent_search" />
 
-        <!-- Search Results (initially GONE, shown after typing) -->
+        <!-- ============================================ -->
+        <!-- SEARCH RESULTS -->
+        <!-- ============================================ -->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_results"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_sm"
+            android:layout_marginTop="14dp"
+            android:clipToPadding="false"
             android:nestedScrollingEnabled="false"
+            android:paddingBottom="16dp"
             android:visibility="gone"
             tools:itemCount="3"
             tools:listitem="@layout/item_favorite" />

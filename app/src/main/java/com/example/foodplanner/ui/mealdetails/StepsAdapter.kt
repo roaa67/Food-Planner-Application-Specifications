@@ -10,33 +10,67 @@ data class StepItem(
     val text: String
 )
 
-/**
- * StepsAdapter — Engineer 1
- * Overrides 3 required methods (course p330-335)
- * Shows green circle number badge + step description text matching mockup media_1787124418496.png
- */
 class StepsAdapter(
     private var steps: List<StepItem>
 ) : RecyclerView.Adapter<StepsAdapter.StepVH>() {
 
-    inner class StepVH(val binding: ItemStepBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    inner class StepVH(
+        val binding: ItemStepBinding
+    ) : RecyclerView.ViewHolder(binding.root)
 
-    override fun getItemCount(): Int = steps.size
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StepVH =
-        StepVH(
-            ItemStepBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        )
-
-    override fun onBindViewHolder(holder: StepVH, position: Int) {
-        val item = steps[position]
-        holder.binding.tvStepNumber.text = item.number.toString()
-        holder.binding.tvStepText.text = item.text
+    override fun getItemCount(): Int {
+        return steps.size
     }
 
-    fun updateData(newSteps: List<StepItem>) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): StepVH {
+
+        val binding =
+            ItemStepBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+
+        return StepVH(binding)
+    }
+
+    override fun onBindViewHolder(
+        holder: StepVH,
+        position: Int
+    ) {
+
+        val item = steps[position]
+
+        holder.binding.tvStepNumber.text =
+            item.number.toString()
+
+        holder.binding.tvStepText.apply {
+
+            text = item.text
+
+            maxLines = Integer.MAX_VALUE
+            isSingleLine = false
+
+            // Make sure RecyclerView recalculates the item height
+            post {
+                requestLayout()
+            }
+        }
+
+        holder.binding.root.post {
+            holder.binding.root.requestLayout()
+        }
+    }
+
+    fun updateData(
+        newSteps: List<StepItem>
+    ) {
+
         steps = newSteps
+
         notifyDataSetChanged()
     }
 }

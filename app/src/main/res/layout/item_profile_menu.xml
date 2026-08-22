@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Profile Menu Row Item — Engineer 1
-    Icon + menu label row with 48dp touch target (Accessibility course p192)
--->
-<LinearLayout
+
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingStart="@dimen/spacing_md"
-    android:paddingEnd="@dimen/spacing_md"
-    android:background="?attr/selectableItemBackground"
+    android:layout_height="64dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
     android:focusable="true"
-    android:clickable="true">
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
 
-    <!-- Menu Icon -->
-    <ImageView
-        android:id="@+id/iv_menu_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_planner"
-        android:contentDescription="@null"
-        android:layout_marginEnd="@dimen/spacing_md"
-        android:alpha="0.7"
-        tools:src="@drawable/ic_home" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="12dp">
 
-    <!-- Menu Label -->
-    <TextView
-        android:id="@+id/tv_menu_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_md"
-        tools:text="My Planner" />
+        <FrameLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/circle_bg">
 
-    <!-- Chevron arrow -->
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_back"
-        android:rotation="180"
-        android:contentDescription="@null"
-        android:alpha="0.4" />
+            <ImageView
+                android:id="@+id/iv_menu_icon"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_planner"
+                app:tint="@color/primary_green"
+                tools:src="@drawable/ic_home" />
 
-</LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_menu_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="My Planner" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:alpha="0.45"
+            android:contentDescription="@null"
+            android:rotation="180"
+            android:src="@drawable/ic_back"
+            app:tint="@color/text_secondary" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

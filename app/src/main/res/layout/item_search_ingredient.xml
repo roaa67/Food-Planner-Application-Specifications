@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Popular Ingredient chip item — Engineer 1
-    Circular image + ingredient name below
-    Course ref: ImageView p175, RecyclerView items p332
--->
-<LinearLayout
+
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="80dp"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="@dimen/spacing_xs"
-    android:layout_marginEnd="@dimen/spacing_sm">
+    android:layout_width="96dp"
+    android:layout_height="118dp"
+    android:layout_marginEnd="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
 
-    <!-- Circular ingredient image -->
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/iv_ingredient"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/cd_meal_image"
-        app:shapeAppearanceOverlay="@style/CircleImageView"
-        tools:src="@drawable/ic_chef_logo"
-        xmlns:app="http://schemas.android.com/apk/res-auto" />
-
-    <!-- Ingredient Name -->
-    <TextView
-        android:id="@+id/tv_ingredient_name"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
-        android:textSize="@dimen/text_xs"
-        android:textColor="@color/text_secondary"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:layout_marginTop="4dp"
-        tools:text="Chicken" />
+        android:orientation="vertical"
+        android:padding="10dp">
 
-</LinearLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_ingredient"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:contentDescription="@string/cd_meal_image"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/CircleImageView"
+            tools:src="@drawable/ic_chef_logo" />
+
+        <TextView
+            android:id="@+id/tv_ingredient_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="Chicken" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>
