@@ -1,75 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Favorites Item — Engineer 1
-    Row: thumbnail image + meal name + time + heart button
-    Course ref: ConstraintLayout p217, MaterialCardView p565, Accessibility p192 (48dp touch targets)
--->
+
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/spacing_sm"
-    app:cardCornerRadius="16dp"
+    android:layout_height="110dp"
+    android:layout_marginBottom="12dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="18dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="@color/white">
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="@dimen/spacing_sm">
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-        <!-- Meal Thumbnail (rounded) -->
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_fav_meal_image"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:scaleType="centerCrop"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:contentDescription="@string/cd_meal_image"
+            android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/RoundedImageView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@drawable/ic_chef_logo" />
 
-        <!-- Meal Name -->
         <TextView
             android:id="@+id/tv_fav_meal_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
             android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_md"
-            android:layout_marginStart="@dimen/spacing_sm"
-            android:layout_marginEnd="@dimen/spacing_xs"
-            app:layout_constraintTop_toTopOf="@id/iv_fav_meal_image"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_fav_meal_image"
             app:layout_constraintEnd_toStartOf="@id/btn_fav_heart"
             tools:text="Grilled Lemon Chicken" />
 
-        <!-- Cooking Time -->
         <TextView
             android:id="@+id/tv_fav_meal_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_sm"
-            android:layout_marginStart="@dimen/spacing_sm"
-            android:layout_marginTop="4dp"
+            android:textSize="13sp"
             app:layout_constraintTop_toBottomOf="@id/tv_fav_meal_name"
             app:layout_constraintStart_toEndOf="@id/iv_fav_meal_image"
             app:layout_constraintEnd_toStartOf="@id/btn_fav_heart"
-            tools:text="45 min" />
+            tools:text="View Recipe" />
 
-        <!-- Heart / Favorite Button (48dp min touch - course Accessibility p192) -->
         <ImageButton
             android:id="@+id/btn_fav_heart"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_favorites"
             android:contentDescription="@string/cd_favorite_button"
+            android:padding="12dp"
+            android:src="@drawable/ic_favorites"
             app:tint="@color/heart_red"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

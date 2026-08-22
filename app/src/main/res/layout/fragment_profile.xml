@@ -1,124 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Profile Screen — Engineer 1 (Lead UI/UX)
-    Dark green header + profile photo + name/email + white menu list
-    Course ref: ConstraintLayout p217, ScrollView p210, LinearLayout p202
--->
+
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_cream">
+    android:background="@color/bg_main"
+    android:fillViewport="true"
+    tools:context=".ui.profile.ProfileFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="28dp">
 
-        <!-- Dark Green Header -->
+        <!-- Profile Header -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:orientation="vertical"
-            android:gravity="center"
+            android:layout_height="230dp"
             android:background="@color/dark_green"
-            android:paddingBottom="@dimen/spacing_xl">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
 
-            <!-- Circular Profile Photo -->
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/iv_profile_photo"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/cd_profile_image"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="104dp"
+                android:layout_height="104dp"
+                app:cardBackgroundColor="@color/light_green"
+                app:cardCornerRadius="52dp"
+                app:cardElevation="0dp"
                 app:strokeColor="@color/white"
-                app:strokeWidth="3dp"
-                android:src="@drawable/ic_profile"
-                android:background="@color/light_green" />
+                app:strokeWidth="3dp">
 
-            <!-- User Name -->
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_profile_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/cd_profile_image"
+                    android:padding="16dp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_profile"
+                    app:shapeAppearanceOverlay="@style/CircleImageView" />
+
+            </com.google.android.material.card.MaterialCardView>
+
             <TextView
                 android:id="@+id/tv_profile_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_sm"
+                android:layout_marginTop="12dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_lg"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="Heba Mohamed" />
+                tools:text="Mohamed" />
 
-            <!-- User Email -->
             <TextView
                 android:id="@+id/tv_profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#B2FFFFFF"
-                android:textSize="@dimen/text_sm"
-                tools:text="heba@example.com" />
+                android:layout_marginTop="3dp"
+                android:textColor="#CCFFFFFF"
+                android:textSize="13sp"
+                tools:text="mohamed@example.com" />
 
         </LinearLayout>
 
-        <!-- White menu card -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- Account Section -->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_md"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/white">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="20dp"
+            android:text="Your account"
+            android:textColor="@color/text_primary"
+            android:textSize="19sp"
+            android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="@dimen/spacing_sm"
-                android:paddingBottom="@dimen/spacing_sm">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
 
-                <!-- My Planner -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_my_planner" />
+            <include
+                android:id="@+id/menu_my_planner"
+                layout="@layout/item_profile_menu" />
 
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginStart="@dimen/spacing_md" android:layout_marginEnd="@dimen/spacing_md" />
+            <include
+                android:id="@+id/menu_favorites"
+                layout="@layout/item_profile_menu" />
 
-                <!-- Favorites -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_favorites" />
+            <include
+                android:id="@+id/menu_my_recipes"
+                layout="@layout/item_profile_menu" />
 
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginStart="@dimen/spacing_md" android:layout_marginEnd="@dimen/spacing_md" />
+        </LinearLayout>
 
-                <!-- My Recipes -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_my_recipes" />
+        <!-- App Section -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="20dp"
+            android:text="App"
+            android:textColor="@color/text_primary"
+            android:textSize="19sp"
+            android:textStyle="bold" />
 
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginStart="@dimen/spacing_md" android:layout_marginEnd="@dimen/spacing_md" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical">
 
-                <!-- Settings -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_settings" />
+            <include
+                android:id="@+id/menu_settings"
+                layout="@layout/item_profile_menu" />
 
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginStart="@dimen/spacing_md" android:layout_marginEnd="@dimen/spacing_md" />
+            <include
+                android:id="@+id/menu_help"
+                layout="@layout/item_profile_menu" />
 
-                <!-- Help & Support -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_help" />
+            <include
+                android:id="@+id/menu_about"
+                layout="@layout/item_profile_menu" />
 
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginStart="@dimen/spacing_md" android:layout_marginEnd="@dimen/spacing_md" />
+            <include
+                android:id="@+id/menu_logout"
+                layout="@layout/item_profile_menu" />
 
-                <!-- About Us -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_about" />
-
-                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider" android:layout_marginStart="@dimen/spacing_md" android:layout_marginEnd="@dimen/spacing_md" />
-
-                <!-- Logout -->
-                <include layout="@layout/item_profile_menu"
-                    android:id="@+id/menu_logout" />
-
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -1,19 +1,21 @@
 package com.example.foodplanner.ui.categories
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.foodplanner.R
+import com.example.foodplanner.RetrofitClient
 import com.example.foodplanner.databinding.FragmentCategoriesBinding
+import com.example.foodplanner.ui.search.SearchFragment
+import com.google.android.material.snackbar.Snackbar
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
-/**
- * CategoriesFragment — Engineer 1 (Lead UI/UX & Design Specialist)
- *
- * Displays a 2-column grid of all food categories.
- * Course ref: Fragment lifecycle p380-382, RecyclerView with GridLayoutManager p335
- */
 class CategoriesFragment : Fragment() {
 
     private var _binding: FragmentCategoriesBinding? = null
@@ -21,51 +23,153 @@ class CategoriesFragment : Fragment() {
 
     private lateinit var categoriesGridAdapter: CategoriesGridAdapter
 
+    private val disposables = CompositeDisposable()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCategoriesBinding.inflate(inflater, container, false)
+
+        _binding = FragmentCategoriesBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(
+        view: View,
+        savedInstanceState: Bundle?
+    ) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
-        loadPlaceholderData()
+        loadCategoriesFromApi()
     }
 
-    /**
-     * Set up 2-column GridLayoutManager — course p335 (GridLayoutManager)
-     */
     private fun setupRecyclerView() {
-        categoriesGridAdapter = CategoriesGridAdapter(emptyList()) { category ->
-            // TODO: Navigate to filtered meal list (Engineer 2 — Presenter/API)
-        }
+
+        categoriesGridAdapter =
+            CategoriesGridAdapter(
+                emptyList()
+            ) { category ->
+
+                Log.d(
+                    "CategoriesFragment",
+                    "Selected category: ${category.name}"
+                )
+
+                openSearchByCategory(
+                    category.name
+                )
+            }
+
         binding.rvCategoriesGrid.apply {
-            layoutManager = GridLayoutManager(requireContext(), 2)
-            adapter = categoriesGridAdapter
+
+            layoutManager =
+                GridLayoutManager(
+                    requireContext(),
+                    2
+                )
+
+            adapter =
+                categoriesGridAdapter
         }
     }
 
-    /**
-     * Placeholder data for UI preview — real data injected by Engineer 2 via ViewModel
-     */
-    private fun loadPlaceholderData() {
-        val placeholders = listOf(
-            CategoryGridItem("Breakfast", "45 meals", ""),
-            CategoryGridItem("Main Course", "120 meals", ""),
-            CategoryGridItem("Desserts", "60 meals", ""),
-            CategoryGridItem("Salads", "30 meals", ""),
-            CategoryGridItem("Soup", "28 meals", ""),
-            CategoryGridItem("Drinks", "34 meals", "")
-        )
-        categoriesGridAdapter.updateData(placeholders)
+    private fun loadCategoriesFromApi() {
+
+        val disposable =
+            RetrofitClient.apiService
+                .getCategories()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { response ->
+
+                        val categories =
+                            response.categories
+                                ?.map { category ->
+
+                                    CategoryGridItem(
+                                        name =
+                                            category.strCategory.orEmpty(),
+
+                                        mealCount =
+                                            "View meals",
+
+                                        imageUrl =
+                                            category.strCategoryThumb.orEmpty()
+                                    )
+                                }
+                                ?: emptyList()
+
+                        categoriesGridAdapter.updateData(
+                            categories
+                        )
+                    },
+                    { error ->
+
+                        Log.e(
+                            "CategoriesFragment",
+                            "Categories API Error",
+                            error
+                        )
+
+                        if (isAdded) {
+
+                            Snackbar.make(
+                                binding.root,
+                                "Failed to load categories",
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                )
+
+        disposables.add(disposable)
+    }
+
+    private fun openSearchByCategory(
+        categoryName: String
+    ) {
+
+        val searchFragment =
+            SearchFragment().apply {
+
+                arguments = Bundle().apply {
+
+                    putString(
+                        "SEARCH_MODE",
+                        "CATEGORY"
+                    )
+
+                    putString(
+                        "SEARCH_VALUE",
+                        categoryName
+                    )
+                }
+            }
+
+        parentFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.fragment_container,
+                searchFragment
+            )
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {
+
+        disposables.clear()
+
+        _binding = null
+
         super.onDestroyView()
-        _binding = null // Prevent memory leaks (course p382)
     }
 }

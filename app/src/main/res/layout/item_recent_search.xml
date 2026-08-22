@@ -1,46 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Recent Search Item — Engineer 1
-    Text + X (remove) button row
-    Course ref: LinearLayout p202
--->
-<LinearLayout
+
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="48dp"
-    android:orientation="horizontal"
-    android:gravity="center_vertical"
-    android:paddingStart="@dimen/spacing_xs"
-    android:paddingEnd="@dimen/spacing_xs">
+    android:layout_height="56dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="1dp"
+    app:strokeColor="@color/divider"
+    app:strokeWidth="1dp">
 
-    <!-- Search icon -->
-    <ImageView
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ic_search"
-        android:contentDescription="@null"
-        android:layout_marginEnd="@dimen/spacing_sm"
-        android:alpha="0.5" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="14dp"
+        android:paddingEnd="6dp">
 
-    <!-- Recent search text -->
-    <TextView
-        android:id="@+id/tv_recent_search_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textColor="@color/text_primary"
-        android:textSize="@dimen/text_md"
-        tools:text="Pasta" />
+        <FrameLayout
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/circle_bg">
 
-    <!-- Remove X button (>= 48dp touch target, course Accessibility p192) -->
-    <ImageButton
-        android:id="@+id/btn_remove_search"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/remove"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:tint="@color/text_secondary" />
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:alpha="0.65"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_search"
+                app:tint="@color/primary_green" />
 
-</LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_recent_search_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="Chicken" />
+
+        <ImageButton
+            android:id="@+id/btn_remove_search"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/remove"
+            android:padding="15dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/text_secondary" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

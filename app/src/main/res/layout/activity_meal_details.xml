@@ -1,161 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Meal Details Screen — Engineer 1 (Lead UI/UX)
-    Full image + name + tags + TabLayout (Ingredients/Steps/Video) + ViewPager2
-    Course ref: TabLayout+ViewPager2 p498-505, ConstraintLayout guidelines p229
-    Accessibility: Back button >= 48dp, Heart button >= 48dp, content descriptions set (p192)
--->
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_cream"
+    android:background="@color/bg_main"
     tools:context=".ui.mealdetails.MealDetailsActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <!-- Hero Image Container -->
+            <!-- ======================================= -->
+            <!-- HERO IMAGE -->
+            <!-- ======================================= -->
+
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="260dp">
+                android:layout_height="290dp">
 
-                <!-- Meal Image -->
                 <ImageView
                     android:id="@+id/iv_meal_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
                     android:contentDescription="@string/cd_meal_image"
+                    android:scaleType="centerCrop"
                     tools:src="@drawable/ic_chef_logo" />
 
-                <!-- Dark gradient overlay at bottom -->
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="130dp"
                     android:layout_gravity="bottom"
                     android:background="@drawable/gradient_bottom_overlay" />
 
-                <!-- Back Button (48dp touch target - course Accessibility p192) -->
-                <FrameLayout
+                <!-- Back -->
+                <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btn_back_meal"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_margin="@dimen/spacing_sm"
-                    android:background="@drawable/bg_social_circle"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
                     android:clickable="true"
                     android:focusable="true"
-                    android:contentDescription="@string/cd_back_button">
+                    android:contentDescription="@string/cd_back_button"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="3dp">
 
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_back"
                         android:contentDescription="@null"
+                        android:src="@drawable/ic_back"
                         app:tint="@color/text_primary" />
 
-                </FrameLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                <!-- Favorite Heart Button (top-right) -->
-                <ImageButton
-                    android:id="@+id/btn_meal_favorite"
+                <!-- Favorite -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="top|end"
-                    android:layout_margin="@dimen/spacing_sm"
-                    android:background="@drawable/bg_social_circle"
-                    android:src="@drawable/ic_favorites"
-                    android:contentDescription="@string/cd_favorite_button"
-                    app:tint="@color/text_secondary" />
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="3dp">
+
+                    <ImageButton
+                        android:id="@+id/btn_meal_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/cd_favorite_button"
+                        android:padding="13dp"
+                        android:src="@drawable/ic_favorites"
+                        app:tint="@color/heart_red" />
+
+                </com.google.android.material.card.MaterialCardView>
 
             </FrameLayout>
 
-            <!-- Meal Info Card (white floating card) -->
+            <!-- ======================================= -->
+            <!-- MEAL INFORMATION -->
+            <!-- ======================================= -->
+
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_md"
-                android:layout_marginEnd="@dimen/spacing_md"
-                android:layout_marginTop="-16dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/white">
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="-28dp"
+                android:layout_marginEnd="18dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="5dp"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="@dimen/spacing_md">
+                    android:padding="18dp">
 
-                    <!-- Meal Name -->
                     <TextView
                         android:id="@+id/tv_meal_detail_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold"
+                        android:ellipsize="end"
+                        android:maxLines="2"
                         android:textColor="@color/text_primary"
-                        android:textSize="@dimen/text_xl"
-                        tools:text="Grilled Lemon Chicken" />
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="Chicken Alfredo Pasta" />
 
-                    <!-- Tags Row: Country | Time | Difficulty -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Everything you need to cook this meal"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+
+                    <!-- Tags -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="@dimen/spacing_xs"
-                        android:gravity="center_vertical">
+                        android:layout_marginTop="14dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                        <!-- Country Tag -->
                         <TextView
                             android:id="@+id/tv_meal_area"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="36dp"
                             android:background="@drawable/bg_tag"
-                            android:paddingStart="@dimen/spacing_sm"
-                            android:paddingEnd="@dimen/spacing_sm"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"
+                            android:gravity="center"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
                             android:textColor="@color/primary_green"
-                            android:textSize="@dimen/text_xs"
-                            tools:text="🇺🇸 American" />
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            tools:text="🌍 Italian" />
 
-                        <!-- Time Tag -->
                         <TextView
                             android:id="@+id/tv_meal_time"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="8dp"
                             android:background="@drawable/bg_tag"
-                            android:paddingStart="@dimen/spacing_sm"
-                            android:paddingEnd="@dimen/spacing_sm"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"
-                            android:layout_marginStart="@dimen/spacing_xs"
+                            android:gravity="center"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
                             android:textColor="@color/text_secondary"
-                            android:textSize="@dimen/text_xs"
+                            android:textSize="12sp"
                             tools:text="45 min" />
 
-                        <!-- Difficulty Tag -->
                         <TextView
                             android:id="@+id/tv_meal_difficulty"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="36dp"
+                            android:layout_marginStart="8dp"
                             android:background="@drawable/bg_tag"
-                            android:paddingStart="@dimen/spacing_sm"
-                            android:paddingEnd="@dimen/spacing_sm"
-                            android:paddingTop="4dp"
-                            android:paddingBottom="4dp"
-                            android:layout_marginStart="@dimen/spacing_xs"
+                            android:gravity="center"
+                            android:paddingStart="12dp"
+                            android:paddingEnd="12dp"
                             android:textColor="@color/text_secondary"
-                            android:textSize="@dimen/text_xs"
+                            android:textSize="12sp"
                             tools:text="Easy" />
 
                     </LinearLayout>
@@ -164,45 +186,62 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- TabLayout (Ingredients / Steps / Video — course p498) -->
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tab_layout_meal"
+            <!-- ======================================= -->
+            <!-- TABS -->
+            <!-- ======================================= -->
+
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_md"
-                android:layout_marginStart="@dimen/spacing_md"
-                android:layout_marginEnd="@dimen/spacing_md"
-                android:background="@color/bg_cream"
-                app:tabSelectedTextColor="@color/primary_green"
-                app:tabTextColor="@color/text_secondary"
-                app:tabIndicatorColor="@color/primary_green"
-                app:tabIndicatorHeight="3dp"
-                app:tabTextAppearance="@style/TabTextAppearance">
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="18dp"
+                android:layout_marginEnd="18dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="1dp">
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_ingredients" />
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout_meal"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@android:color/transparent"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/primary_green"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorHeight="3dp"
+                    app:tabMode="fixed"
+                    app:tabSelectedTextColor="@color/primary_green"
+                    app:tabTextColor="@color/text_secondary"
+                    app:tabTextAppearance="@style/TabTextAppearance">
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_steps" />
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tab_ingredients" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_video" />
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tab_steps" />
 
-            </com.google.android.material.tabs.TabLayout>
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tab_video" />
 
-            <!-- ViewPager2 (swipeable tabs content — course p502) -->
+                </com.google.android.material.tabs.TabLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ======================================= -->
+            <!-- TAB CONTENT -->
+            <!-- ======================================= -->
+
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/vp2_meal_tabs"
                 android:layout_width="match_parent"
-                android:layout_height="550dp"
-                android:layout_marginTop="@dimen/spacing_sm"
-                android:layout_marginBottom="@dimen/spacing_md" />
+                android:layout_height="560dp"
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
 

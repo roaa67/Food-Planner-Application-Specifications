@@ -1,58 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Category Grid Item — Engineer 1
-    Shows image, category name, and meal count in a card
-    Course ref: MaterialCardView p565-566, RecyclerView item p332
--->
+
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_sm"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="2dp"
-    app:cardBackgroundColor="@color/white">
+    android:layout_height="210dp"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="3dp"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/spacing_sm">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <!-- Category Image -->
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_category_grid_image"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:scaleType="centerCrop"
+            android:layout_height="145dp"
             android:contentDescription="@string/cd_meal_image"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/RoundedImageView"
             tools:src="@drawable/ic_chef_logo" />
 
-        <!-- Category Name -->
-        <TextView
-            android:id="@+id/tv_category_grid_name"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/spacing_sm"
-            android:paddingEnd="@dimen/spacing_sm"
-            android:paddingTop="@dimen/spacing_xs"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:textSize="@dimen/text_md"
-            tools:text="Breakfast" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingStart="14dp"
+            android:paddingEnd="14dp">
 
-        <!-- Meal Count -->
-        <TextView
-            android:id="@+id/tv_category_grid_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/spacing_sm"
-            android:paddingEnd="@dimen/spacing_sm"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_sm"
-            tools:text="45 meals" />
+            <TextView
+                android:id="@+id/tv_category_grid_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="Seafood" />
+
+            <TextView
+                android:id="@+id/tv_category_grid_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/primary_green"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="View meals" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>
